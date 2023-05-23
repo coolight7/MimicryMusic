@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="./src/images/MimicryMusic-s.png"> 
+  <meta name="author" content="coolight">
+  <meta name="keywords" content="mimicry,mymusic,music,bili,音乐">
+  <meta name="description" content="在线音乐播放">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta content="always" name="referrer" >
+  <meta content="always" name="host" >
+  <link rel="stylesheet" type="text/css" href="./css/cmusic.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/cmusic_ngint.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/cmusic_sun.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/cmusic_noTransition.min.css">
+  <title>拟声 - MimicryMusic</title>
+</head>
+<body id="body" class="fun_body">
+    <div id="mymusic" class="cwin_displayFlexColumn">
+        <div class="startLoading">
+            <div class="loader-43"></div>
+            <span>正在加载中...</span>
+        </div>
+    </div>
+    <script type="module" src="./src/main.ts"></script>
+    <!-- 
+        <script src="./js/photoview/three.min.js"></script>
+        <script src="./js/photoview/TweenMax.min.js"></script>
+    -->
+</body>
+</html>
+
+<style>
+.startLoading {
+    display:flex;
+    flex-direction:column;
+    left: 0px;
+    top: 0px;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+}
+.startLoading span {
+    color: #78778f;
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
+@keyframes shadowRolling {
+  0% {
+    box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+  12% {
+    box-shadow: 100px 0 #00afee, 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+  25% {
+    box-shadow: 110px 0 #00afee, 100px 0 #00afee, 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+  36% {
+    box-shadow: 120px 0 #00afee, 110px 0 #00afee, 100px 0 #00afee, 0px 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    box-shadow: 130px 0 #00afee, 120px 0 #00afee, 110px 0 #00afee, 100px 0 #00afee;
+  }
+  62% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 #00afee, 120px 0 #00afee, 110px 0 #00afee;
+  }
+  75% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 #00afee, 120px 0 #00afee;
+  }
+  87% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 #00afee;
+  }
+  100% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.loader-43 {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    color: #00afee;
+    left: -100px;
+    -webkit-animation: shadowRolling 2s linear infinite;
+    animation: shadowRolling 2s linear infinite;
+}
+
+</style>
