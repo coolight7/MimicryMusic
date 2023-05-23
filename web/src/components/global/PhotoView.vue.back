@@ -1,0 +1,574 @@
+<script setup>
+import { onMounted, onBeforeUnmount, ref, watchEffect } from 'vue'
+import '../../../js/photoview/bas'
+
+const threeContainer = ref(null);
+const PhotoViewDetail = ref(null);
+let tween, slide, slide2, root;
+let animationId;
+let setTimeout_init, setTimeout_tween;
+let main_duration = 3.0, main_delay = 3.0;
+let width = 100, height = 50;
+//index：即将替换进来的图片位于imglist的下标
+//flag：用于判断应当替换slide还是slide2
+let index = 0, flag = 0;
+let imgCache = [];
+
+onMounted(() => {
+	loadProps();
+	watchEffect(() => {
+		let i = parseInt(props.index);
+		if(i >= 0 && i < props.imglist.length) {
+			index = i;
+		}
+	})
+	setTimeout_init = setTimeout(() => {
+		init();
+	}, 1000);
+})
+onBeforeUnmount(() => {
+	if(tween) {
+		tween.kill();
+	}
+	if(animationId) {
+		cancelAnimationFrame(animationId);
+	}
+	if(setTimeout_init) {
+		clearTimeout(setTimeout_init);
+	}
+	if(setTimeout_tween) {
+		clearTimeout(setTimeout_tween);
+	}
+	tween = null;
+	root = null;
+	slide = null;
+	slide2 = null;
+})
+const props = defineProps({
+	imglist: {
+		type:Array,
+		required:true
+	},
+	index:{
+		type:Number
+	},
+	duration:{	//动画时长
+		type:Number
+	},
+	delay: {	//延迟等待时长
+		type:Number
+	}
+})
+const emits = defineEmits({
+	'change':	null,
+	'click':	null,
+	'loadstart':null,
+	'loadend':	null,
+})
+
+const loadProps = () => {
+	if(props.duration > 0) {
+		main_duration = props.duration;
+	}
+	if(props.delay > 0) {
+		main_delay = props.delay;
+	}
+}
+
+//切换图片
+const loadImg = () => {
+	let s;
+	++flag;
+	if(flag == 0) {
+		s = slide;
+	} else {
+		s = slide2;
+		flag = -1;
+	}
+	setImg(props.imglist[index], s);
+	emits('change', index);
+	indexpp();
+}
+
+const setImg = (in_img, in_slide) => {
+	if(imgCache[in_img]) {
+		in_slide.setImage(imgCache[in_img]);
+		return;
+	}
+	let l1 = new THREE.ImageLoader();
+	l1.setCrossOrigin('Anonymous');
+	emits('loadstart');
+	l1.load(in_img, function (img) {
+		in_slide.setImage(img);
+		imgCache[in_img] = img;
+		emits('loadend');
+	})
+}
+
+const indexpp = () => {
+	++index;
+	if(index >= 0 && index < props.imglist.length) {
+		return;
+	}
+	index = 0;
+}
+
+function init() {
+	root = new THREERoot({
+		createCameraControls: !true,
+		antialias: (window.devicePixelRatio === 1),
+		fov: 80
+	});
+
+	root.renderer.setClearColor(0xdde8fc, 0);
+	root.renderer.setPixelRatio(window.devicePixelRatio || 1);
+	root.camera.position.set(0, 0, 60);
+
+	slide = new Slide(width, height, 'in');
+	setImg(props.imglist[index], slide);
+	indexpp();
+	slide2 = new Slide(width, height, 'out');
+	setImg(props.imglist[index], slide2);
+	indexpp();
+
+
+	root.scene.add(slide);
+	root.scene.add(slide2);
+	setTimeout_tween = setTimeout(() => {
+		tween = new TimelineMax({ 
+			repeat: -1,
+			repeatDelay: main_delay,
+			yoyo: true,
+			onRepeat:loadImg
+		});
+
+		tween.add(slide.transition(), 0);
+		tween.add(slide2.transition(), 0);
+	}, main_delay * 1000);
+
+	//按键盘P暂停动画
+	// window.addEventListener('keyup', function (e) {
+	//   if (e.keyCode === 80) {
+	//     tween.paused(!tween.paused());
+	//   }
+	// });
+}
+
+////////////////////
+// CLASSES
+////////////////////
+
+function Slide(width, height, animationPhase) {
+	var plane = new THREE.PlaneGeometry(width, height, width * 2, height * 2);
+
+	THREE.BAS.Utils.separateFaces(plane);
+
+	var geometry = new SlideGeometry(plane);
+
+	geometry.bufferUVs();
+
+	var aAnimation = geometry.createAttribute('aAnimation', 2);
+	var aStartPosition = geometry.createAttribute('aStartPosition', 3);
+	var aControl0 = geometry.createAttribute('aControl0', 3);
+	var aControl1 = geometry.createAttribute('aControl1', 3);
+	var aEndPosition = geometry.createAttribute('aEndPosition', 3);
+
+	var i, i2, i3, i4, v;
+
+	var minDuration = 0.8;
+	var maxDuration = 1.2;
+	var maxDelayX = 0.9;
+	var maxDelayY = 0.125;
+	var stretch = 0.11;
+
+	this.totalDuration = maxDuration + maxDelayX + maxDelayY + stretch;
+
+	var startPosition = new THREE.Vector3();
+	var control0 = new THREE.Vector3();
+	var control1 = new THREE.Vector3();
+	var endPosition = new THREE.Vector3();
+
+	var tempPoint = new THREE.Vector3();
+
+	function getControlPoint0(centroid) {
+		var signY = Math.sign(centroid.y);
+
+		tempPoint.x = THREE.Math.randFloat(0.1, 0.3) * 50;
+		tempPoint.y = signY * THREE.Math.randFloat(0.1, 0.3) * 70;
+		tempPoint.z = THREE.Math.randFloatSpread(20);
+
+		return tempPoint;
+	}
+
+	function getControlPoint1(centroid) {
+		var signY = Math.sign(centroid.y);
+
+		tempPoint.x = THREE.Math.randFloat(0.3, 0.6) * 50;
+		tempPoint.y = -signY * THREE.Math.randFloat(0.3, 0.6) * 70;
+		tempPoint.z = THREE.Math.randFloatSpread(20);
+
+		return tempPoint;
+	}
+
+	for (i = 0, i2 = 0, i3 = 0, i4 = 0; i < geometry.faceCount; i++, i2 += 6, i3 += 9, i4 += 12) {
+		var face = plane.faces[i];
+		var centroid = THREE.BAS.Utils.computeCentroid(plane, face);
+
+		// animation
+		var duration = THREE.Math.randFloat(minDuration, maxDuration);
+		var delayX = THREE.Math.mapLinear(centroid.x, -width * 0.5, width * 0.5, 0.0, maxDelayX);
+		var delayY;
+
+		if (animationPhase === 'in') {
+			delayY = THREE.Math.mapLinear(Math.abs(centroid.y), 0, height * 0.5, 0.0, maxDelayY)
+		}
+		else {
+			delayY = THREE.Math.mapLinear(Math.abs(centroid.y), 0, height * 0.5, maxDelayY, 0.0)
+		}
+
+		for (v = 0; v < 6; v += 2) {
+			aAnimation.array[i2 + v] = delayX + delayY + (Math.random() * stretch * duration);
+			aAnimation.array[i2 + v + 1] = duration;
+		}
+
+		// positions
+
+		endPosition.copy(centroid);
+		startPosition.copy(centroid);
+
+		if (animationPhase === 'in') {
+			control0.copy(centroid).sub(getControlPoint0(centroid));
+			control1.copy(centroid).sub(getControlPoint1(centroid));
+		}
+		else { // out
+			control0.copy(centroid).add(getControlPoint0(centroid));
+			control1.copy(centroid).add(getControlPoint1(centroid));
+		}
+
+		for (v = 0; v < 9; v += 3) {
+			aStartPosition.array[i3 + v] = startPosition.x;
+			aStartPosition.array[i3 + v + 1] = startPosition.y;
+			aStartPosition.array[i3 + v + 2] = startPosition.z;
+
+			aControl0.array[i3 + v] = control0.x;
+			aControl0.array[i3 + v + 1] = control0.y;
+			aControl0.array[i3 + v + 2] = control0.z;
+
+			aControl1.array[i3 + v] = control1.x;
+			aControl1.array[i3 + v + 1] = control1.y;
+			aControl1.array[i3 + v + 2] = control1.z;
+
+			aEndPosition.array[i3 + v] = endPosition.x;
+			aEndPosition.array[i3 + v + 1] = endPosition.y;
+			aEndPosition.array[i3 + v + 2] = endPosition.z;
+		}
+	}
+
+	var material = new THREE.BAS.BasicAnimationMaterial(
+		{
+			shading: THREE.FlatShading,
+			side: THREE.DoubleSide,
+			uniforms: {
+				uTime: { type: 'f', value: 0 }
+			},
+			shaderFunctions: [
+				THREE.BAS.ShaderChunk['cubic_bezier'],
+				//THREE.BAS.ShaderChunk[(animationPhase === 'in' ? 'ease_out_cubic' : 'ease_in_cubic')],
+				THREE.BAS.ShaderChunk['ease_in_out_cubic'],
+				THREE.BAS.ShaderChunk['quaternion_rotation']
+			],
+			shaderParameters: [
+				'uniform float uTime;',
+				'attribute vec2 aAnimation;',
+				'attribute vec3 aStartPosition;',
+				'attribute vec3 aControl0;',
+				'attribute vec3 aControl1;',
+				'attribute vec3 aEndPosition;',
+			],
+			shaderVertexInit: [
+				'float tDelay = aAnimation.x;',
+				'float tDuration = aAnimation.y;',
+				'float tTime = clamp(uTime - tDelay, 0.0, tDuration);',
+				'float tProgress = ease(tTime, 0.0, 1.0, tDuration);'
+				//'float tProgress = tTime / tDuration;'
+			],
+			shaderTransformPosition: [
+				(animationPhase === 'in' ? 'transformed *= tProgress;' : 'transformed *= 1.0 - tProgress;'),
+				'transformed += cubicBezier(aStartPosition, aControl0, aControl1, aEndPosition, tProgress);'
+			]
+		},
+		{
+			map: new THREE.Texture(),
+		}
+	);
+
+	THREE.Mesh.call(this, geometry, material);
+
+	this.frustumCulled = false;
+}
+Slide.prototype = Object.create(THREE.Mesh.prototype);
+Slide.prototype.constructor = Slide;
+Object.defineProperty(Slide.prototype, 'time', {
+	get: function () {
+		return this.material.uniforms['uTime'].value;
+	},
+	set: function (v) {
+		this.material.uniforms['uTime'].value = v;
+	}
+});
+
+Slide.prototype.setImage = function (image) {
+	this.material.uniforms.map.value.image = image;
+	this.material.uniforms.map.value.needsUpdate = true;
+};
+
+Slide.prototype.transition = function () {
+	return TweenMax.fromTo(this, main_duration, { time: 0.0 }, { time: this.totalDuration, ease: Power0.easeInOut });
+};
+
+
+function SlideGeometry(model) {
+	THREE.BAS.ModelBufferGeometry.call(this, model);
+}
+SlideGeometry.prototype = Object.create(THREE.BAS.ModelBufferGeometry.prototype);
+SlideGeometry.prototype.constructor = SlideGeometry;
+SlideGeometry.prototype.bufferPositions = function () {
+	var positionBuffer = this.createAttribute('position', 3).array;
+
+	for (var i = 0; i < this.faceCount; i++) {
+		var face = this.modelGeometry.faces[i];
+		var centroid = THREE.BAS.Utils.computeCentroid(this.modelGeometry, face);
+
+		var a = this.modelGeometry.vertices[face.a];
+		var b = this.modelGeometry.vertices[face.b];
+		var c = this.modelGeometry.vertices[face.c];
+
+		positionBuffer[face.a * 3] = a.x - centroid.x;
+		positionBuffer[face.a * 3 + 1] = a.y - centroid.y;
+		positionBuffer[face.a * 3 + 2] = a.z - centroid.z;
+
+		positionBuffer[face.b * 3] = b.x - centroid.x;
+		positionBuffer[face.b * 3 + 1] = b.y - centroid.y;
+		positionBuffer[face.b * 3 + 2] = b.z - centroid.z;
+
+		positionBuffer[face.c * 3] = c.x - centroid.x;
+		positionBuffer[face.c * 3 + 1] = c.y - centroid.y;
+		positionBuffer[face.c * 3 + 2] = c.z - centroid.z;
+	}
+};
+
+
+function THREERoot(params) {
+	params = utils.extend({
+		fov: 60,
+		zNear: 10,
+		zFar: 100000,
+
+		createCameraControls: true
+	}, params);
+
+	this.renderer = new THREE.WebGLRenderer({
+		antialias: params.antialias,
+		alpha: true
+	});
+	this.renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+	threeContainer.value.appendChild(this.renderer.domElement);
+
+	this.camera = new THREE.PerspectiveCamera(
+		params.fov,
+		window.innerWidth / window.innerHeight,
+		params.zNear,
+		params.zfar
+	);
+
+	this.scene = new THREE.Scene();
+
+	if (params.createCameraControls) {
+		this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+	}
+	this.resize = this.resize.bind(this);
+	this.tick = this.tick.bind(this);
+
+	this.resize();
+	this.tick();
+}
+THREERoot.prototype = {
+	tick: function () {
+		this.update();
+		this.render();
+		animationId = requestAnimationFrame(this.tick);
+	},
+	update: function () {
+		this.controls && this.controls.update();
+	},
+	render: function () {
+		this.renderer.render(this.scene, this.camera);
+	},
+	resize: function () {
+		let w = PhotoViewDetail.value.clientWidth, h = PhotoViewDetail.value.clientHeight;
+		this.camera.aspect = w / h;
+		this.camera.updateProjectionMatrix();
+
+		this.renderer.setSize(w, h);
+	}
+};
+
+////////////////////
+// UTILS
+////////////////////
+
+var utils = {
+	//合并src到dst中，如果并且会将src中的值覆盖dst中相同key的value
+	extend: function (dst, src) {
+		for (let key in src) {
+			dst[key] = src[key];
+		}
+
+		return dst;
+	},
+	//随机 1 / -1
+	randSign: function () {
+		return Math.random() > 0.5 ? 1 : -1;
+	},
+	ease: function (ease, t, b, c, d) {
+		return b + ease.getRatio(t / d) * c;
+	},
+	fibSpherePoint: (function () {
+		let vec = { x: 0, y: 0, z: 0 };
+		let G = Math.PI * (3 - Math.sqrt(5));
+
+		return function (i, n, radius) {
+			let step = 2.0 / n;
+			let r, phi;
+
+			vec.y = i * step - 1 + (step * 0.5);
+			r = Math.sqrt(1 - vec.y * vec.y);
+			phi = i * G;
+			vec.x = Math.cos(phi) * r;
+			vec.z = Math.sin(phi) * r;
+
+			radius = radius || 1;
+
+			vec.x *= radius;
+			vec.y *= radius;
+			vec.z *= radius;
+
+			return vec;
+		}
+	})(),
+	spherePoint: (function () {
+		return function (u, v) {
+			u === undefined && (u = Math.random());
+			v === undefined && (v = Math.random());
+
+			let theta = 2 * Math.PI * u;
+			let phi = Math.acos(2 * v - 1);
+
+			let vec = {};
+			vec.x = (Math.sin(phi) * Math.cos(theta));
+			vec.y = (Math.sin(phi) * Math.sin(theta));
+			vec.z = (Math.cos(phi));
+
+			return vec;
+		}
+	})()
+};
+
+//拖动控制
+let seekSpeed = 0.003;
+// desktop
+function stop() {
+	TweenMax.to(tween, 1, { timeScale: 0 });
+}
+function resume() {
+	TweenMax.to(tween, 1, { timeScale: 1 });
+}
+function seek(dx) {
+	let progress = tween.progress();
+	let p = THREE.Math.clamp((progress + (dx * seekSpeed)), 0, 1);
+	tween.progress(p);
+}
+const event_mousedown = (e) => {
+	e = e || window.event;
+	let _cx = e.clientX;
+	stop();
+
+	document.onmousemove = (e) => {
+		e = e || window.event;
+		let cx = e.clientX;
+		let dx = cx - _cx;
+		_cx = cx;
+		seek(dx);
+	};
+	document.onmouseup = (e) => {
+		document.onmousemove = null;
+		document.onmouseup = null;
+		resume();
+	}
+	return false;
+};
+// mobile
+const event_touchstart = (e) => {
+	e = e || window.event;
+	let _cx = e.touches[0].clientX;
+	stop();
+	e.preventDefault();
+
+	document.ontouchmove = (e) => {
+		e = e || window.event;
+		let cx = e.touches[0].clientX;
+		let dx = cx - _cx;
+		_cx = cx;
+		seek(dx);
+		e.preventDefault();
+	};
+	document.ontouchend = (e) => {
+		e = e || window.event;
+		document.ontouchmove = null;
+		document.ontouchend = null;
+		e.preventDefault();
+		resume();
+	};
+	return false;
+};
+const resize = () => {
+	root.resize();
+}
+
+const photo_click = () => {
+	emits('click', index);
+}
+
+defineExpose({
+	resize,
+})
+</script>
+
+<template>
+	<div class="PhotoViewDetail" 
+		ref="PhotoViewDetail"
+		@click="photo_click"
+		@mousedown="event_mousedown" 
+		@touchstart="event_touchstart">
+		<div ref="threeContainer"></div>
+	</div>
+</template>
+
+<style>
+canvas {
+	width: 100% !important;
+	height: auto !important;
+	aspect-ratio:2 / 1;
+	background: transparent;
+}
+
+.PhotoViewDetail {
+	cursor: pointer;
+	border-radius: 20px;
+    background: #dde8fc;
+    box-shadow: 11px 11px 22px #a3cde0,
+    -11px -11px 22px #dcfbfd;
+    -webkit-box-shadow:11px 11px 22px #a3cde0,
+    -11px -11px 22px #dcfbfd;
+}
+</style>
