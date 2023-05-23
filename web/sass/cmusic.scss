@@ -1,0 +1,1550 @@
+$color_xx_dark: #3b4046;
+$color_x_dark:  #394953;
+$color_dark:    #485862;
+
+$color_gray:     #a3b4ce;
+$color_x_gray:   #9ea8c9;
+$color_xx_gray:  #78778f;
+
+$color_blue:     #66ccff;
+$color_x_blue:   #18a9db;
+
+$color_light:    #dde8fc;
+$color_x_light:  #e1f4ee;
+$color_xx_light: #fff;
+
+
+body{
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    transition: background .8s;
+}
+
+button {
+    outline: none;
+}
+
+/*炫彩*/
+.fun_body {
+    margin: 0;
+    padding: 0;
+    background: #cfdde9;
+}
+.cmusic_color_div {
+    width: 100vw;
+    height: 100vh;
+    top:0;
+    left:0;
+    position: fixed;
+    z-index: -1;
+}
+/*炫彩皮肤的背景圆*/
+.cmusic_color {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(170px);
+}
+.cmusic_color-1 {
+    top: -10%;
+    right: 35%;
+    width: 30%;
+    height: 30%;
+    background: #ffc4e3;
+}
+.cmusic_color-2 {
+    bottom: 0px;
+    left: 5%;
+    width: 30%;
+    height: 30%;
+    background: #ffffd2;
+}
+.cmusic_color-3 {
+    bottom: 5%;
+    right: 5%;
+    width: 30%;
+    height: 30%;
+    background: #00d2ff;
+}
+
+/*播放器名*/
+#cmusic_header_title {
+    position: absolute;
+    text-align: center;
+    color: #66ccff;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bolder;
+    font-size: 30px;
+    white-space:nowrap;
+    overflow: hidden;
+}
+.cmusic_header_title_close {
+    width: 0px !important;
+}
+
+#cmusic_wrap {
+    display: flex;
+    flex-direction: column;
+    margin-top: 130px;
+}
+
+/*播放器背景*/
+#cmusic_wrap_div {
+    border-radius: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 3px solid #dde8fc;
+    box-shadow:15px 15px 40px rgba(255, 255, 255, 0.2),
+        -15px -15px 40px rgba(255, 255, 255, 0.2),
+        inset 10px 10px 30px #dde8fc,
+        inset -10px -10px 30px #dde8fc;
+    -webkit-box-shadow:15px 15px 40px rgba(255, 255, 255, 0.2),
+        -15px -15px 40px rgba(255, 255, 255, 0.2),
+        inset 10px 10px 30px #dde8fc,
+        inset -10px -10px 30px #dde8fc;
+
+    background: hsla(0, 0%, 100%, 0.1);
+    color: #dde8fc;
+    backdrop-filter: blur(20px);    //USE_高
+    transition: background, width, height .8s;
+}
+.cool_circle_div {
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: -1;
+}
+/*浮动泡泡*/
+.cool_circle {
+    position:absolute;
+    background: rgba(102, 204, 255, 0.5);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    filter: hue-rotate(calc(var(--x) * 70deg)) blur(10px);
+    transform: translate3D(0,0,0);
+    /* 调用动画animate，需要10s完成动画*/
+    animation: cool_animate 10s linear infinite;
+    /* 动态计算动画延迟几秒播放 */
+    animation-delay: calc(var(--x) * -1s);
+}
+
+/* 背景圆动画 */
+@keyframes cool_animate {
+    0%, 100% {
+        transform: translateY(-50px);
+    }
+    50% {
+        transform: translateY(50px);
+    }
+}
+.cool_circle:nth-child(3) {
+    top: 5%;
+    left: 20%;
+    width: 100px;
+    height: 100px;
+}
+.cool_circle:nth-child(4) {
+    top: 20%;
+    left: -20px;
+    width: 120px;
+    height: 120px;
+}
+.cool_circle:nth-child(5) {
+    bottom: 30%;
+    right: 10px;
+    width: 80px;
+    height: 80px;
+}
+.cool_circle:nth-child(2) {
+    bottom: 20%;
+    left: 5%;
+    width: 60px;
+    height: 60px;
+}
+.cool_circle:nth-child(1) {
+    top: 10%;
+    right: 10%;
+    width: 60px;
+    height: 60px;
+}
+
+#cmusic_info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+/*歌曲图片*/
+.cmusic_info_songThumb {
+    display: flex;
+    margin-top: -40%;
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+
+    border: 5px solid #aeedff;
+    box-shadow: 14px 14px 28px rgba(0, 0, 0, 0.1),
+        -14px -14px 28px #dde8fc;
+    -webkit-box-shadow:14px 14px 28px rgba(0, 0, 0, 0.1),
+        -14px -14px 28px #dde8fc;
+    z-index: 2;
+    transition: width .8s;
+}
+.cmusic_info_songThumb img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit:cover;
+    z-index: 2;
+}
+/*歌曲图波浪*/
+.cmusic_img_wave {
+    position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	filter: blur(5px);
+    pointer-events: none;
+    background: #afedff;
+    animation: img_wave 4s linear infinite;
+}
+@keyframes img_wave {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/*歌曲图的旋转动画*/
+.cmusic_songThumb_rotate {
+    animation: img_rotate infinite linear 25s;
+}
+
+@keyframes img_rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+/*歌曲标题*/
+.cmusic_info_songName {
+    width: 100%;
+    text-align: center;
+    color: #78778f;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 25px;
+    word-break:keep-all;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+/*歌曲艺术家*/
+.cmusic_info_artist {
+    text-align: center;
+    color: #aab7c2;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bolder;
+    font-size:large;
+    word-break:keep-all;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+/*控制按钮栏*/
+#cmusic_control {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.cmusic_control_speed span {
+    color:#66ccff;
+    font-weight: bold;
+    margin-left: 10px;
+}
+/*进度条*/
+.cmusic_control_progress {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    margin-bottom: 10px;
+}
+.cmusic_control_span_progressBar,
+.cmusic_control_volume_progressBar {
+    border-radius: 50px;
+    height: 20px;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    background: transparent;
+    box-shadow: inset 2px 2px 4px #bcc5d6,
+        inset -2px -2px 5px #feffff;
+    -webkit-box-shadow:inset 2px 2px 4px #bcc5d6,
+        inset -2px -2px 5px #feffff;
+    border: 2px solid #d0f4ff;
+    justify-content: center;
+    transition: box-shadow 0.8s;
+}
+@media (any-hover: hover){
+    .cmusic_control_span_progressBar:hover {
+        cursor: pointer;
+    }
+}
+.cmusic_control_volume_progressBar {
+    width: 100px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.cmusic_control_progress_div {
+    position:absolute;
+    width:94% !important;
+    height:100%;
+    align-items: center;
+}
+/*播放进度条*/
+.cmusic_control_span_progress,
+.cmusic_control_span_loadProgress,
+.cmusic_control_volume_progress {
+    background: linear-gradient(90deg, #c4f4fe, #66ccff);
+    border-radius: 50px;
+    position: absolute;
+    height: 60%;
+    pointer-events: none;
+    transition: width 0.5s;
+    box-shadow: 2px 2px 10px #ccd3ff,
+        -2px -2px 10px #ccd3ff;
+    -webkit-box-shadow:2px 2px 10px #ccd3ff,
+        -2px -2px 10px #ccd3ff;
+}
+/*加载进度条*/
+.cmusic_control_span_loadProgress {
+    background: linear-gradient(90deg, #abecd6, #fff9d2);
+}
+/*进度条时间*/
+.cmusic_control_span_alltime,
+.cmusic_control_span_time {
+    color: #a3b4ce;
+    margin-right: 5%;
+    margin-left: 5%;
+    font-weight: bolder;
+    font-size: larger;
+}
+/*加载动画*/
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.loader-5 {
+    position: absolute;
+    width: 33px;
+    height: 33px;
+    top:0px; 
+    left:0px;
+    border: 3px solid #00afee;
+    border-radius: 50%;
+    -webkit-animation: rotation 1s linear infinite;
+    animation: rotation 1s linear infinite;
+    z-index: -1;
+}
+.loader-5::after {
+  content: "";
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 45px;
+  height: 45px;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: #66ccff transparent;
+  z-index: -1;
+}
+
+/*控制按钮*/
+.cmusic_control_btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    fill: #66ccff;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    box-shadow: 3px 3px 5px rgba(0,0,0, 0.1),
+        -3px -3px 5px rgb(204, 240, 251);
+    -webkit-box-shadow:3px 3px 5px rgba(0,0,0, 0.1),
+        -3px -3px 5px rgb(204, 240, 251);
+    transition: box-shadow .25s;
+}
+@media (any-hover: hover){
+    .cmusic_control_btn:hover {
+        cursor: pointer;
+        border: 3px solid #dde8fc;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2),
+            0px 0px 0px rgba(255, 255, 255, 0.2),
+            inset 18px 18px 30px rgba(0, 0, 0, 0.1),
+            inset -18px -18px 30px rgba(255, 255, 255, 0.2);
+        transition: box-shadow .25s;
+    }
+}
+.cmusic_control_btn svg {
+    display: inline-block;
+    height: 24px;
+}
+.cmusic_control_btn span {
+    color:#78778f;
+    font-size: large;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/*选中按钮样式*/
+.cmusic_control_btn_selected {
+    background: #66ccff;
+    fill:#fff;
+    border: 3px solid #fff;
+    box-shadow:3px 3px 5px rgba(0,0,0, 0.1),
+        -3px -3px 5px rgb(204, 240, 251),
+        inset 2px 2px 5px #a5c2cf,
+        inset -1px -1px 4px #dde8fc;
+    -webkit-box-shadow:3px 3px 5px rgba(0,0,0, 0.1),
+        -3px -3px 5px rgb(204, 240, 251),
+        inset 2px 2px 5px #a5c2cf,
+        inset -1px -1px 4px #dde8fc;
+}
+.cmusic_control_btn_selected span{
+    color: #fff !important;
+}
+//禁用按钮样式
+.cmusic_control_btn_disabled {
+    border: 3px dashed #aab7c2;
+}
+@media (any-hover: hover){
+    .cmusic_control_btn_disabled:hover {
+        cursor:default;
+        border: 3px dashed #aab7c2;
+    }
+}
+/*通用按钮样式*/
+.cmusic_control_btn_noShadow {
+    width: 40px;
+    height: 40px;
+    border: transparent;
+    background: transparent;
+    border-radius: 10px;
+    margin: auto;
+    fill: #18a9db;
+    cursor: pointer;
+}
+.cmusic_control_btn_noShadow svg {
+    width: 18px;
+    height: 18px;
+}
+/*控制按钮栏*/
+.cmusic_control_btnList_class {
+    width: 100%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+/*主体的下部分*/
+#cmusic_bottom {
+    width: 100%;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+#cmusic_bottom::-webkit-scrollbar {
+    display: none;
+}
+
+.cmusic_moreBtn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/*提示信息栏*/
+#cmusic_tip {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    z-index: 900;
+    transition: width .8s;
+}
+/*提示栏展开*/
+.cmusic_tip_open {
+    width: 100% !important;
+}
+#cmusic_tip span {
+    overflow: hidden;
+}
+
+/*提示栏的消息数量提示*/
+.cmusic_tipNum_span {
+    width: auto;
+    height: 100%;
+    color: #66ccff;
+    font-weight: bold;
+    white-space: nowrap;    /*让文字只有一行*/
+}
+
+/*提示内容*/
+.cmusic_tip_span {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: width .8s;
+}
+.cmusic_tip_span a {
+    white-space: nowrap;    /*让文字只有一行*/
+    position: relative;
+    font-size:x-large;
+    font-weight: bolder;
+    text-decoration: none;
+    letter-spacing: 2px;
+    color: transparent;
+    -webkit-text-stroke: 1px #66ccff;
+}
+.cmusic_tip_span a::before {
+    content: attr(data-text);
+    position: absolute;
+    color: #fff;
+    width: 0;
+    text-overflow: inherit;
+    overflow: hidden;
+    transition: 1s;
+    border-right: 8px solid #66ccff;
+    -webkit-text-stroke: 1px #66ccff;
+}
+.cmusic_tip_span_animate a::before,
+.cmusic_tip_span a:hover::before {
+    width: 100%;
+    filter: drop-shadow(0 0 25px #66ccff);
+}
+
+.cmusic_tip_span_close {
+    width: 0px !important;
+}
+
+/*播放列表*/
+.cmusic_playList,
+.cmusic_lyricCtrl {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+/*列表ul样式*/
+.cmusic_playList_ul {
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    overflow-y: scroll; /*显示纵向滚动条*/
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+}
+.cmusic_playList_ul>:first-child {
+    margin-top: 40px;
+}
+.cmusic_playList_ul>:last-child {
+    margin-bottom: 40px;
+}
+//列表旁的按钮栏样式
+.cmusic_ul_btnList {
+    width: 40px !important;
+}
+.cmusic_li_name {
+    color:#75738e;
+    align-self: start;
+}
+.cmusic_li_artist {
+    color:#a8b5c1;
+    font-size:smaller;
+    align-self: start;
+}
+/*列表vue动画*/
+.song_drag-move,
+.playlist_drag-move,
+.contain_funbar_drag-move {
+    transition: transform .5s;
+}
+.song_drag-leave-active,
+.playlist_drag-leave-active,
+.contain_funbar_drag-leave-active {
+    position: absolute;
+}
+.song_drag-enter,
+.song_drag-leave-to,
+.playlist_drag-enter,
+.playlist_drag-leave-to,
+.contain_funbar_drag-enter,
+.contain_funbar_drag-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+/*排序时样式*/
+.cmusic_edit_order {
+    cursor: move;
+}
+/*滚动条样式*/
+.cmusic_playList_ul::-webkit-scrollbar {
+    display: none;
+}
+/*播放列表 单项样式 悬浮选中样式*/
+.cmusic_playList_li {
+    width: 90%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    margin-bottom: 10px;
+    transition: 0.5s;
+}
+.cmusic_playList_item_selected {
+    background: #e3eefa;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+        -5px -5px 10px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+        -5px -5px 10px rgba(255, 255, 255, 1);
+    transform: scale(1) translateX(15px);
+}
+.cmusic_playList_li_hover {
+    height: 60px;
+}
+.cmusic_playList_li_hover:hover{
+    background: #e3eefa;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+        -5px -5px 10px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+        -5px -5px 10px rgba(255, 255, 255, 1);
+    transform: scale(1) translateX(15px);
+}
+.cmusic_playlist_li_notransform {
+    width: 90%;
+    border-radius: 15px;
+    transform:none;
+    margin-left: auto;
+    margin-right: auto;
+    justify-self: center;
+}
+.cmusic_playlist_li_notransform:hover {
+    transform:none;
+}
+/*播放列表 歌曲图*/
+.cmusic_playList_thumb {
+    border: 3px solid #fff;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    display: inline-block;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.cmusic_playList_thumb img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    object-fit:cover;
+}
+/*列表项里访问权限标签（公开/私密/保护）的样式*/
+.cmusic_lists_tag {
+    width:auto !important;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cmusic_lists_tag svg {
+    width: 12px;
+    height: 16px;
+    fill: #18a9db;
+    margin-right: 3px;
+}
+.cmusic_lists_tag span {
+    font-size:x-small;
+    color:#66ccff;
+    border: 1px solid #66ccff;
+    border-radius: 5px;
+    padding: 2px;
+    white-space:nowrap;
+    margin-right: 7px;
+}
+.cmusic_lists_tag_text {
+    font-size:small !important;
+    font-weight: bold;
+    color:#66ccff;
+    border: none !important;
+    margin-right:0px !important;
+    padding: 0px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*播放列表 歌曲歌名*/
+.cmusic_playList_title {
+    // TODO: 更换更好的限制宽度方法
+    // 当title内文字过长时，即使设置裁剪，仍然会让包裹文字的div变长
+    max-width: 270px;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    cursor:pointer;
+    overflow: hidden;
+}
+.cmusic_playList_title span{
+    width: 100%;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: start;
+}
+/*登录/注册切换按钮div*/
+.cmusic_sign_type_div {
+    display: flex;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+//SelectLineVue的按钮
+.cmusic_selectLine_button {
+    width: 50% !important;
+    color:#9ea8c9;
+    font-size: larger;
+    font-weight: bolder;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (any-hover: hover){
+    .cmusic_selectLine_button:hover:before {
+        width: 100%;
+    }
+}
+.cmusic_selectLine_button::before{
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    width: 0px;
+    height: 5px;
+    border-radius: 30px;
+    background: #66ccff;
+    transition: width 0.5s;
+}
+.cmusic_selectLine_button svg {
+    fill:#a3b4ce;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+}
+.cmusic_selectLine_button_select {
+    color: #78778f;
+}
+.cmusic_selectLine_button_select svg {
+    fill: #4c8cf3;
+}
+.cmusic_selectLine_button_select:before {
+    width: 100%;
+}
+/*登录/注册表单div样式*/
+.cmusic_user_sign_div {
+    display: flex;
+    flex-direction: column;
+}
+/*搜索框*/
+.cmusic_search_div {
+    width: 40px;
+    display: inline-flex;
+    margin-right: 10px;
+    transition: width 1s;
+}
+.cmusic_search_div_active {
+    width:80%;
+    border-radius: 30px;
+    background: #dde8fc;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+    -5px -5px 10px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+    -5px -5px 10px rgba(255, 255, 255, 1);
+    transition: width 1s;
+}
+/*搜索框里的输入框*/
+.cmusic_search_input {
+    margin-left: 10px;
+    width: 95%;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    color: #66ccff;
+    font-size: 16px;
+}
+/*登录/注册 输入框样式*/
+.cmusic_user_sign_div_input{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 70%;
+    height: 40px;
+    background: #dde8fc;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    padding-left: 15px;
+    color: #66ccff;
+    font-size: 18px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+        -5px -5px 10px rgba(255, 255, 255, 1);
+}
+/*登录/注册 按钮*/
+.cmusic_user_sign_button {
+    width: 50%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    font-size: large;
+    font-weight: bold;
+    color:#72718d;
+
+    border: 3px solid #dde8fc;
+    background: #dde8fc;
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+    -5px -5px 10px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+    -5px -5px 10px rgba(255, 255, 255, 1);
+    /* 动画过渡 */
+    transition: box-shadow 0.25s;
+}
+@media (any-hover: hover){
+    .cmusic_user_sign_button:hover {
+        cursor: pointer;
+        background: transparent;
+        box-shadow:0px 0px 0px rgba(0, 0, 0, 0.2),
+            0px 0px 0px rgba(255, 255, 255, 0.2),
+            inset 3px 3px 7px #a5c2cf,
+            inset -5px -5px 10px #dfffff;
+        transition: box-shadow 0.25s;
+    }
+}
+/*用户名样式*/
+.cmusic_user_name {
+    margin-right: 10px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-size: large;
+    font-weight: bold;
+    color: #75738f;
+}
+.cmusic_user_cid {
+    color: #a3b4ce;
+}
+/*用户功能按钮*/
+.cmusic_user_btn {
+    width: auto;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cmusic_user_btn svg {
+    width: 40px;
+}
+/*用户头像*/
+.cmusic_user_icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+        -4px -4px 10px #fff;
+    -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+        -4px -4px 10px #fff;
+    border: 3px solid #dde8fc;
+    -webkit-border: 3px solid #dde8fc;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 2;
+}
+.cmusic_user_icon img {
+    max-width: 100%;
+    height: 100%;
+}
+/*在button内的span提示*/
+.cmusic_btn_span {
+    display: flex;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+}
+.cmusic_btn_span svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+.cmusic_btn_span span {
+    width: auto;
+    height: auto;
+    color: #18a9db;
+    font-size: medium;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*通用布局类*/
+.cmusic_displayFlex_class {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cmusic_displayFlexColumn_class {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cmusic_between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cmusic_playList_selectBtn {
+    width: 100px;
+    margin-right: 10px;
+}
+.cmusic_playList_selectBtn span {
+    width: 50px;
+    color: #72718d;
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+}
+/*checkbox样式*/
+.cmusic_checkbox_setbg {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cmusic_checkbox_span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: auto;
+    height: 40px;
+    font-weight: bolder;
+    color: #656d78;
+}
+/*用户信息栏数据字*/
+.cmusic_user_info_span {
+    width:50%;
+    height:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+.cmusic_user_info_span svg {
+    width:24px;
+    height:24px;
+    margin-right: 10px;
+}
+.cmusic_user_info_span span {
+    font-size: larger;
+    font-weight: bold;
+    color:#75738f;
+}
+/*状态栏按钮样式*/
+.cmusic_statuBar_btn {
+    width: auto;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+}
+.cmusic_statuBar_btn svg{
+    margin-right: 5px;
+}
+.cmusic_statuBar_btn span{
+    height: auto;
+    font-size: large;
+    font-weight: bold;
+    color: #66ccff;
+}
+//底部导航栏
+.cmusic_footerBar {
+    height: 77px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100;
+}
+.cmusic_footerBar_span {
+    position: absolute;
+    height: 100%;
+    width: 80%;
+    border-radius: 20px;
+    justify-self:center;
+    align-self:center;
+    background:#c4f4fe;
+    pointer-events: none;
+    transition: width 0.5s;
+}
+.cmusic_footerBar_content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow:15px 15px 40px rgba(255, 255, 255, 0.2),
+        -15px -15px 40px rgba(255, 255, 255, 0.2),
+        inset 10px 10px 30px #dde8fc,
+        inset -10px -10px 30px #dde8fc;
+    -webkit-box-shadow:15px 15px 40px rgba(255, 255, 255, 0.2),
+        -15px -15px 40px rgba(255, 255, 255, 0.2),
+        inset 10px 10px 30px #dde8fc,
+        inset -10px -10px 30px #dde8fc;
+
+    background: hsla(0, 0%, 100%, 0.1);
+    color: #dde8fc;
+    backdrop-filter: blur(10px);    //USE_高
+    transition: width .8s;
+}
+.cmusic_footerBar_songThumb {
+    width: 100px;
+    height:100px;
+    margin: 0px;
+    position: absolute;
+    left: -15px;
+    bottom: -15px;
+}
+.cmusic_footerBar_progress {
+    width: 100%;
+    height: 20px;
+}
+//底部显示/隐藏按钮
+.cmusic_footerBar_btn {
+    display: flex;
+    float: right;
+}
+.cmusic_footerBar_bg {
+    pointer-events:none;
+}
+.cmusic_moreBtn_line {
+    display:flex; 
+    margin-left:auto; 
+    margin-right:auto;
+    margin-bottom: 10px;
+    align-items: center;
+}
+// text
+.cmusic_textCross_color {
+    color: $color_gray;
+}
+.cmusic_textMain_color {
+    color: $color_dark;
+}
+.cmusic_textCross_font {
+    font-size: large;
+    font-weight: bold;
+}
+.cmusic_textMain_font {
+    font-size: x-large;
+    font-weight: bolder;
+}
+.cmusic_textCross {
+    font-size: large;
+    font-weight: bold;
+    color: $color_gray;
+}
+.cmusic_textMain {
+    font-size: x-large;
+    font-weight: bolder;
+    color: $color_dark;
+}
+.cmusic_text_ellipsis {
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+}
+//说明提示
+.cmusic_tipSpan_explain {
+    width: 100%;
+    text-align: center;
+    color:#a3b4ce;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cmusic_tipSpan_commend {
+    width: 100%;
+    text-align: center;
+    color:#78778f;
+    font-size: large;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cmusic_topBar {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    z-index: 900;
+}
+.cmusic_area {
+    width:95%;
+    border: 2px dashed #9ea8c9;
+    border-radius: 20px;
+}
+.cmusic_list_depict {
+    color: #9ea8c9;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+/*通用布局类*/
+.cwin_displayFlex {
+    width: 100%;
+    display:flex;
+    margin-left:auto; 
+    margin-right:auto;
+}
+.cwin_displayFlexColumn {
+    width: 100%;
+    display:flex;
+    flex-direction:column;
+    margin-left:auto; 
+    margin-right:auto;
+}
+/*弹窗模板样式*/
+.cwin_wrap {
+    align-items: center;
+    justify-content: center;
+    left: 0px;
+    top: 0px;
+    background:rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(7px);
+    margin: 0px;
+    width:100%;
+    z-index:300;
+    position:fixed;
+}
+/*弹窗体*/
+.cwin_content {
+    width: 400px;
+    border-radius: 20px;
+    /* 渐变背景 */
+    border: 1px solid $color_xx_light;
+    box-shadow:15px 15px 40px rgba(255, 255, 255, 0.2),
+        -15px -15px 40px rgba(255, 255, 255, 0.2),
+        inset 10px 10px 30px $color_light,
+        inset -10px -10px 30px $color_light;
+    -webkit-box-shadow:15px 15px 40px rgba(255, 255, 255, 0.2),
+        -15px -15px 40px rgba(255, 255, 255, 0.2),
+        inset 10px 10px 30px $color_light,
+        inset -10px -10px 30px $color_light;
+    background: $color_light;
+    color: $color_light;
+    backdrop-filter: blur(1px);
+    transition: all .5s ease;
+}
+.cwin_header_title {
+    text-align:center;
+    justify-content: center;
+    align-items: center;
+    color:$color_xx_gray;
+    font-weight:bolder;
+    font-size:27px;
+}
+/*通用居中类*/
+.cwin_center {
+    display: flex;
+    text-align:center;
+    justify-content: center;
+    align-items: center;
+}
+
+/*用户框*/
+.cwin_user_div {
+    display: flex;
+    width: auto;
+    height: auto;
+}
+
+.cwin_content_img {
+    position: absolute;
+    left: -30px;
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius:50%;
+    border: 5px solid #aeedff;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -14px -14px 28px #dde8fc;
+    -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1), -14px -14px 28px #dde8fc;
+}
+
+/*弹窗尾部按钮样式*/
+.cwin_footerBtn_div {
+    width:90%;
+    position:absolute;
+    bottom: 10px;
+}
+.cwin_footer_btn {
+    width: 30% !important;
+    font-size: large;
+    font-weight: bold;
+    color: $color_xx_gray;
+}
+.cwin_info_input {
+    width:100%;
+    margin-left: 120px;
+}
+/*设置定时停止播放弹窗的 时间 样式*/
+.cwin_setclocking_time_span {
+    color:$color_x_blue;
+    font-weight:bold;
+    font-size:larger;
+    margin-right:7px;
+}
+/*设置定时停止播放弹窗的 时间单位 样式*/
+.cwin_setclocking_time_unit {
+    color:$color_x_gray;
+    font-weight:bold;
+    font-size:larger;
+}
+/*设置定时停止播放弹窗的 提示 样式*/
+.cwin_setclocking_tip {
+    font-weight:bold;
+    color:$color_dark;
+    margin-right:10px;
+}
+.cwin_tipSpan {
+    width: 100%;
+    text-align: center;
+    color:$color_x_gray;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cmusic_textarea {
+    height: 200px;
+    resize: none;
+    outline:none;
+    font-size:larger;
+    font-weight: bold;
+    color:#66ccff;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #66ccff;
+    background:#dde8fc;
+}
+.cmusic_textarea::-webkit-scrollbar {
+    display: none;
+}
+.cmusic_textarea::-webkit-input-placeholder {
+    color: #a3b4ce;
+}
+
+//侧边导航栏
+.cmusic_btnListBar {
+    width: auto;
+    height: 100%;
+    position: fixed;
+    left: 10px;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    pointer-events:none;
+}
+.cmusic_btnListBar_ul {
+    width: 40px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    background-image:linear-gradient(#8eecff ,#dce6e4 100%);
+    border-radius: 10px;
+    border: 3px solid #fff;
+    pointer-events:all;
+    transition: .3s;
+    box-shadow:5px 5px 20px rgba(255, 255, 255, 0.5),
+    -5px -5px 20px rgba(255, 255, 255, 0.5);
+    -webkit-box-shadow:5px 5px 20px rgba(255, 255, 255, 0.5),
+        -5px -5px 20px rgba(255, 255, 255, 0.5);
+}
+.cmusic_btnListBar_ul:hover {
+    width: 190px;
+}
+.cmusic_btnListBar_li {
+    width: 180px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: .3s;
+}
+.cmusic_btnListBar_li div {
+    overflow: hidden;
+}
+.cmusic_btnListBar_li:hover,
+.cmusic_btnListBar_li_selected {
+    background: #e3eefa;
+    margin: 5px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+            -5px -5px 10px rgba(255, 255, 255, 1);
+}
+.cmusic_btnListBar_li_img {
+    width:40px;
+    height:40px;
+    margin-left: 0px;
+}
+.cmusic_btnListBar_li_span {
+    width: 100px;
+    height: 100%;
+    text-align:start;
+    font-weight: bold;
+    font-size: larger;
+    letter-spacing: 5px;
+    color: #66ccff;
+}
+//顶部导航栏
+.cmusic_containTopBar {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.cmusic_shadow {
+    mask-image:linear-gradient(
+        180deg, 
+        hsla(0,0%,100%,0) 0,
+        hsla(0,0%,100%,.6) 10%,
+        #fff 20%,
+        #fff 80%,
+        hsla(0,0%,100%,.6) 90%,
+        hsla(0,0%,100%,0));
+    -webkit-mask-image: linear-gradient(
+        180deg, 
+        hsla(0,0%,100%,0) 0,
+        hsla(0,0%,100%,.6) 10%,
+        #fff 20%,
+        #fff 80%,
+        hsla(0,0%,100%,.6) 90%,
+        hsla(0,0%,100%,0));
+}
+//歌词
+.cmusic_lyric_ul {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y:scroll; /*显示纵向滚动条*/
+    list-style: none;
+    margin: 0px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+.cmusic_lyric_ul>:first-child {
+    margin-top: 50px;
+}
+.cmusic_lyric_ul>:last-child {
+    margin-bottom: 50px;
+}
+/*滚动条样式*/
+.cmusic_lyric_ul::-webkit-scrollbar {
+    display: none;
+}
+.cmusic_lyric_li {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.cmusic_lyric_li_span {
+    font-size: medium;
+    font-weight:normal;
+    color: #aab7c2;
+    cursor: pointer;
+    transition: .5s;
+}
+.cmusic_lyric_li_span_select {
+    font-size: larger;
+    font-weight: bolder;
+    color: #66ccff;
+    cursor: pointer;
+}
+//弹幕
+.cmusic_barrage_div {
+    display: flex;
+    pointer-events:none;
+    z-index: 200;
+    position:fixed;
+    overflow: hidden;
+}
+.cmusic_barrage_item {
+    pointer-events:none;
+    width: auto;
+    height: auto;
+    position: absolute;
+    font-size:large;
+    color: #66ccff;
+    font-weight: bold;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.cmusic_lyricEdit_time {
+    width: 70px;
+    border-radius: 10px;
+    font-size: medium;
+    text-align: center;
+    margin-right: 10px;
+    color: #aab7c2;
+    background: none;
+    border: none;
+    font-weight: bold;
+    outline: none;
+}
+.cmusic_lyricEdit_content {
+    width: 100%;
+    border-radius: 10px;
+    margin-right: 10px;
+    font-size: larger;
+    font-weight: bold;
+    color: #66ccff;
+    background: none;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    transition: .5s;
+}
+.cmusic_lyricEdit_time:hover,
+.cmusic_lyricEdit_time:focus,
+.cmusic_lyricEdit_content:hover,
+.cmusic_lyricEdit_content:focus {
+    background: rgba(102, 204, 255, 0.1);
+    border: 1px solid #66ccff;
+}
+.cmusic_lyricEdit_noActive input{
+    font-size: medium;
+    font-weight: normal;
+    color: #aab7c2;
+}
+//右边功能提示栏
+.cmusic_containFunBar {
+    width: auto;
+    height: 100%;
+    position: fixed;
+    right: 10px;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    pointer-events:none;
+}
+.cmusic_containFunBar_ul {
+    width: 50px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    pointer-events:all;
+    align-items: flex-end;
+    transition: .3s;
+}
+.cmusic_containFunBar_ul:hover {
+    width: 300px;
+}
+.cmusic_containFunBar_li {
+    width: 300px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 10px;
+    justify-content: flex-end;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    transition: .3s;
+}
+.cmusic_containFunBar_ul_span {
+    font-weight: bold;
+    color: #75738f;
+    margin-right: 10px;
+}
+.cmusic_containFunBar_ul_btn {
+    margin-right: 0px;
+}
