@@ -45,7 +45,7 @@
 ## 支持平台：
   * web
   * windows (win10及以上，且为64位)
-  * android (安卓4.1及以上，支持arm64-v8a、armeabi-v7a、x64、x86)
+  * android (安卓4.1及以上，支持arm64-v8a、armeabi-v7a、x86_64)
 
 ## 开发语言
   * 后端使用的是c++开发，以及小部分go
