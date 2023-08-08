@@ -1,5 +1,5 @@
 # MimicryMusic 拟声 开源计划
-* 官网: https://music.mimicry.cool/
+* 下载官网: https://download.music.mimicry.cool/
 * 目前已经开源web端
 
 ## 简介
