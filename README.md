@@ -24,23 +24,11 @@
   * ......
 
 ## 预览图
-* 安卓客户端:
-![df41cbc578be9e92e600604fa60a513](https://github.com/coolight7/MimicryMusic/assets/91963225/df9b95b9-835f-4842-a91d-ad4534bad6f5)
-![0bee6544a7fd6701529249d9af49d45](https://github.com/coolight7/MimicryMusic/assets/91963225/12d57704-973e-4d15-8b6e-f19cfd78aeab)
-![0b72b8bb4f014b86e01ebf279c7e841](https://github.com/coolight7/MimicryMusic/assets/91963225/39a05cb4-537d-4976-87c2-ced9afd5e863)
-
-* win客户端：
-![image](https://github.com/coolight7/MimicryMusic/assets/91963225/60bee861-b506-48bf-a759-c06e4acb9037)
-![6c5b7d5b10938e6964bf1132ddbd5c3](https://github.com/coolight7/MimicryMusic/assets/91963225/c640aa10-051b-41d3-9420-d4843b614783)
-![image](https://github.com/coolight7/MimicryMusic/assets/91963225/06d0c7a6-6614-42b2-af58-bd513c420b0c)
-![image](https://github.com/coolight7/MimicryMusic/assets/91963225/1ad39915-4a3b-437d-af1b-df5565565331)
-
-* web端：
-![image](https://github.com/coolight7/MimicryMusic/assets/91963225/47b203eb-e83c-4ca1-b2f1-46cfe3a1e86b)
-![image](https://github.com/coolight7/MimicryMusic/assets/91963225/cc20c7c5-0fcb-4da8-baed-362115cc08a2)
-![image](https://github.com/coolight7/MimicryMusic/assets/91963225/df21b348-02cc-4018-a6c3-5f9e13982545)
-![image](https://github.com/coolight7/MimicryMusic/assets/91963225/c453704c-8a01-46a9-ac01-6769a1e5a956)
-![image](https://github.com/coolight7/MimicryMusic/assets/91963225/a49f561e-ceda-453d-9ea6-0ef0b8d2d315)
+![Shell_20230804-204952-189-](https://github.com/coolight7/MimicryMusic/assets/91963225/7184ad63-51fd-4cb1-aa8f-0653fe5f149b)
+![Shell_20230804-205003-346-](https://github.com/coolight7/MimicryMusic/assets/91963225/e1cccc89-59f6-42c4-836a-ead9a3089ce0)
+![Shell_20230804-210217-664-](https://github.com/coolight7/MimicryMusic/assets/91963225/206a7014-3539-43fe-9da4-fcc0730e96cd)
+![Shell_20230804-210229-972-](https://github.com/coolight7/MimicryMusic/assets/91963225/e084322f-4f9a-4cf0-9bd5-293c0e47c6aa)
+![Shell_20230804-211233-367-](https://github.com/coolight7/MimicryMusic/assets/91963225/6302a253-ee33-410f-b280-8d3852b1c996)
 
 ## 支持平台：
   * web
@@ -49,8 +37,8 @@
 
 ## 开发语言
   * 后端使用的是c++开发，以及小部分go
-  * 前端一套代码，由 ts+vue 开发
   * 客户端由flutter提供多平台支持
+  * 前端一套代码，由 ts+vue 开发
 
 ## 拟声 Web端
 * 基本已经完成了 javascript 转向 typescript
