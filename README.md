@@ -1,6 +1,6 @@
 # MimicryMusic 拟声 开源计划
 * 下载官网: https://download.music.mimicry.cool/
-* 目前已经开源web端、c++后端基础
+* 目前已经开源web端、c++后端基础库
 
 ## 简介
 * 新拟态风格的 音乐播放器
