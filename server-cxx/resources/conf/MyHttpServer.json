@@ -1,0 +1,27 @@
+{
+  "server": {
+    "port": 80,
+    "mysql": {
+      "url": "mysql://coolight:@127.0.0.1:3306/",
+      "dbname": "数据库名"
+    }
+  },
+  "src": {
+    "html": {
+      "default": [
+        {
+          "200": "../html/default/200.html"
+        },
+        {
+          "403": "../html/default/403.html"
+        },
+        {
+          "404": "../html/default/404.html"
+        },
+        {
+          "405": "../html/default/405.html"
+        }
+      ]
+    }
+  }
+}
