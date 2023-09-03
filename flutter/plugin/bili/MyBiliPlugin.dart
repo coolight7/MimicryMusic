@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:mymusic/components/global/MyImage.dart';
 import 'package:mymusic/components/global/MyPopup.dart';
-import 'package:mymusic/entity/PlaylistEntity.dart';
+import 'package:mymusic/plugin/bili/BilibiliEntity.dart';
 import 'package:mymusic/util/MyLogger.dart';
 import 'package:mymusic/util/MyNetwork.dart';
 import 'package:mymusic/util/MyParse.dart';
