@@ -1,4 +1,4 @@
-# MimicryMusic 拟声 开源计划
+# MimicryMusic 拟声
 * 下载官网: https://download.music.mimicry.cool/
 * 目前已经开源web端、c++后端基础库
 
