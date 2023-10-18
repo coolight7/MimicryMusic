@@ -50,7 +50,7 @@
 ## 拟声开源内容
 ### 后端
 * 目前已开源后端的基础库
-* 使用c++开发，基于搜狗开源框架 [workflow]，扩展了一些功能，便于后端服务的开发。
+* 使用c++开发，基于搜狗开源框架 [workflow](https://github.com/sogou/workflow)，扩展了一些功能，便于后端服务的开发。
 ### Web端
 * 基本已经完成了 javascript 转向 typescript
 * 使用了 vue3 + vite + pinia
