@@ -32,9 +32,14 @@ class MyParse_c {
   static List<int> parseListItemToInt(List<dynamic> in_list) {
     List<int> ids = [];
     for (int i = 0; i < in_list.length; ++i) {
-      final item = int.tryParse(in_list[i].toString());
-      if (null != item) {
+      final item = in_list[i];
+      if (item is int) {
         ids.add(item);
+      } else {
+        final intItem = int.tryParse(item.toString());
+        if (null != intItem) {
+          ids.add(intItem);
+        }
       }
     }
     return ids;
@@ -72,6 +77,37 @@ class MyParse_c {
       final reScan = parseData(data!.data!);
       if (null != reScan) {
         succDo(reScan);
+      }
+    }
+  }
+
+  static void parseSingletionEntityDB_int<T>(
+    SingletionEntityDB? data,
+    T? Function(int) parseData,
+    void Function(T) succDo,
+  ) {
+    if (null != data?.data) {
+      final reint = int.tryParse(data!.data!);
+      if (null != reint) {
+        final reScan = parseData(reint);
+        if (null != reScan) {
+          succDo(reScan);
+        }
+      }
+    }
+  }
+
+  static void parseSingletionEntityDB_bool<T>(
+    SingletionEntityDB? data,
+    void Function(bool?) succDo,
+  ) {
+    if (null != data?.data) {
+      if (data?.data == "true") {
+        succDo(true);
+      } else if (data?.data == "false") {
+        succDo(false);
+      } else {
+        succDo(null);
       }
     }
   }
@@ -189,7 +225,7 @@ class MyParse_c {
           restr += "$hours小时";
         }
         if (minutes.isNotEmpty) {
-          restr += "$minutes分";
+          restr += "$minutes分钟";
         }
         if (seconds.isNotEmpty) {
           restr += "$seconds秒";
