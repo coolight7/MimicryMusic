@@ -161,10 +161,16 @@ class MyBiliPlugin_c {
     if (wbi_img.isAvailable()) {
       return true;
     }
-    final resp = await MyNet_c.to().bili_get(
-      MyUrl_e.bili_nav,
+    var resp = await MyNet_c.to().bili_get(
+      MyUrl_e.bili_x_nav,
       doErrTip: doErrTip,
     );
+    if (null == resp || 200 != resp.statusCode || null == resp.data["data"]) {
+      resp = await MyNet_c.to().bili_get(
+        MyUrl_e.bili_nav,
+        doErrTip: doErrTip,
+      );
+    }
     if (null != resp && 200 == resp.statusCode && null != resp.data["data"]) {
       final data = resp.data["data"];
       final wbi = data["wbi_img"];
@@ -219,7 +225,7 @@ class MyBiliPlugin_c {
   }
 
   /// 获取b站视频信息
-  Future<BiliVideoInfoEntity_c?> getBiliInfo(
+  Future<BiliVideoInfoEntity_c?> getBiliVideoInfo(
     String in_bvid, {
     bool doErrTip = true,
   }) async {
@@ -230,6 +236,25 @@ class MyBiliPlugin_c {
     );
     if (null != resp && 200 == resp.statusCode && null != resp.data["data"]) {
       return BiliVideoInfoEntity_c.fromJson(resp.data["data"]);
+    } else {
+      return null;
+    }
+  }
+
+  Future<BiliAudioInfoEntity_c?> getBiliAudioInfo(
+    String in_auid, {
+    bool doErrTip = true,
+  }) async {
+    if (in_auid.startsWith(RegExp('[a-zA-Z]{2}'))) {
+      in_auid = in_auid.substring(2);
+    }
+    final resp = await MyNet_c.to().bili_get(
+      MyUrl_e.bili_songInfo,
+      queryParameters: {"sid": in_auid},
+      doErrTip: doErrTip,
+    );
+    if (null != resp && 200 == resp.statusCode && null != resp.data["data"]) {
+      return BiliAudioInfoEntity_c.fromJson(resp.data["data"]);
     } else {
       return null;
     }

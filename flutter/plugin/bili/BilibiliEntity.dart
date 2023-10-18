@@ -164,6 +164,88 @@ class BiliVideoInfoEntity_c {
       return BiliVideoInfoEntity_c(icon: MySrcImage_c());
     }
   }
+
+  List<BiliVideoInfoEntity_c> getList() {
+    final relist = <BiliVideoInfoEntity_c>[];
+    // 拆分 分p加入
+    for (int i = 0; i < pages.length; ++i) {
+      final item = pages[i];
+      final addItem = BiliVideoInfoEntity_c(
+        attr: attr,
+        avid: avid,
+        bvid: bvid,
+        own: own,
+        title: item.title,
+        icon: (item.icon.isSrcEmpty()) ? icon : item.icon,
+        duration: item.duration,
+        created_time: created_time,
+      );
+      addItem.pages.add(item);
+      relist.add(addItem);
+    }
+    // 拆分 合集 加入
+    if (null != season) {
+      relist.addAll(season!.list);
+    }
+    return relist;
+  }
+}
+
+class BiliAudioInfoEntity_c {
+  String auid;
+  int uid;
+  String own;
+  String author;
+  String title;
+  MySrcImage_c icon;
+  String lyric;
+  int duration; // 秒
+  int createdTime;
+  int playNum;
+
+  BiliAudioInfoEntity_c({
+    this.auid = "",
+    this.uid = -1,
+    this.own = "",
+    this.author = "",
+    this.title = "",
+    this.lyric = "",
+    this.duration = 0,
+    this.createdTime = 0,
+    this.playNum = 0,
+    required this.icon,
+  });
+
+  factory BiliAudioInfoEntity_c.fromJson(Map<String, dynamic> json) {
+    final entity = BiliAudioInfoEntity_c(
+      auid: json["auid"] ?? "",
+      uid: json["uid"] ?? -1,
+      own: json["uname"] ?? "",
+      author: json["author"] ?? "",
+      title: json["title"] ?? "",
+      lyric: json["lyric"] ?? "",
+      duration: json["duration"] ?? 0,
+      createdTime: json["passtime"] ?? 0,
+      playNum: json["statistic"]?["playNum"] ?? 0,
+      icon: MySrcImage_c(
+        src: json["cover"] ?? "",
+        info: MySrcInfo_c(type: MySrcType_e.Bili),
+      ),
+    );
+    return entity;
+  }
+
+  factory BiliAudioInfoEntity_c.fromJsonStr(String json) {
+    try {
+      return BiliAudioInfoEntity_c.fromJson(convert.jsonDecode(json));
+    } catch (e) {
+      PlaylistStore.mylog.severe(MyLogItem(
+        prefix: "json 解析错误",
+        msg: [e.toString(), json],
+      ));
+      return BiliAudioInfoEntity_c(icon: MySrcImage_c());
+    }
+  }
 }
 
 /// bili收藏夹结构
