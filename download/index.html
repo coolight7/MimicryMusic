@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MimicryMusic-s.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>『拟声』下载官网</title>
+</head>
+
+<body>
+    <div class="mimicry_popup" id="mimicry_popup">
+        <div class="mimicry_popup_content">
+            <div class="mimicry_row" style="justify-content: space-between;align-items: center;">
+                <span class="cmusic_textMain">选择系统架构</span>
+                <button class="mimicry_button" onclick="popupClose()" style="align-self: self-end;">关闭</button>
+            </div>
+            <div style="height: 20px;"></div>
+            <ul id="downlist" class="cmusic_playList_ul" style="background-color: #2f363e;border-radius: 20px;">
+                <li class="cmusic_playlist_li_notransform"
+                    style="display: flex;justify-content: center;align-items: center;">
+                    <span class="cmusic_textCross">『空空如也』</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mimicry_column" id="adaptBody" style="display: none;">
+        <div class="mimicry_column" style="align-items: center;height: 150px;width: 100%;padding-top: 30px;">
+            <!-- 图标 -->
+            <img class="cmusic_image" src="images/MimicryMusic-full.png" alt="拟声" />
+            <strong class="cmusic_textMain" style="margin-top: 15px;margin-bottom: 15px;">拟声</strong>
+            <span class="cmusic_textCross">『 拟物风音视频播放器 』</span>
+        </div>
+        <div class="mimicry_column" style="padding-top: 30px;width: 100%;">
+            <ul class="cmusic_playList_ul" id="list">
+                <!-- 列表 -->
+                <li class="cmusic_playlist_li_notransform"
+                    style="display: flex;flex-direction: column; justify-content: center;align-items: center;">
+                    <div
+                        style="display: flex;flex-direction: column; justify-content: center;align-items: center;margin-bottom: 10px;">
+                        <svg class="pl2" viewBox="0 0 128 128" width="128px" height="128px">
+                            <g fill="var(--primary)">
+                                <g class="pl2__rect-g">
+                                    <rect class="pl2__rect" rx="8" ry="8" x="0" y="128" width="40" height="24"
+                                        transform="rotate(180)" />
+                                </g>
+                                <g class="pl2__rect-g">
+                                    <rect class="pl2__rect" rx="8" ry="8" x="44" y="128" width="40" height="24"
+                                        transform="rotate(180)" />
+                                </g>
+                                <g class="pl2__rect-g">
+                                    <rect class="pl2__rect" rx="8" ry="8" x="88" y="128" width="40" height="24"
+                                        transform="rotate(180)" />
+                                </g>
+                            </g>
+                            <g fill="#66ccff" mask="url(#pl-mask)">
+                                <g class="pl2__rect-g">
+                                    <rect class="pl2__rect" rx="8" ry="8" x="0" y="128" width="40" height="24"
+                                        transform="rotate(180)" />
+                                </g>
+                                <g class="pl2__rect-g">
+                                    <rect class="pl2__rect" rx="8" ry="8" x="44" y="128" width="40" height="24"
+                                        transform="rotate(180)" />
+                                </g>
+                                <g class="pl2__rect-g">
+                                    <rect class="pl2__rect" rx="8" ry="8" x="88" y="128" width="40" height="24"
+                                        transform="rotate(180)" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="cmusic_textMain">正在加载下载列表...</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mimicry_column"
+        style="justify-content: center;align-items: center;padding-top: 50px;padding-bottom: 30px;">
+        <span class="cmusic_textCross">© 2022-2024 By『coolight • 郑泳坤』</span>
+        <a target="_blank" href="https://beian.miit.gov.cn/" class="cmusic_textCross">粤ICP备2021172577号</a>
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44011302003939"
+            class="cmusic_textCross">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAFOklEQVR42k3UaUzTZwDH8UfmNqPG6Oamc04lM/OYZs4DxQw85vBGBQ/KiiAqiop4C4yhAtPMA8VbZ2SbJo7JVFSYKCAooCCoUCkF5JCWo7S0lZa2XH7X8QJ48fvn/yRPPs/veZ7kEYCgydSR9iazwGQS5haFAIMA1eCmsjt+d0+HPfvnSEh+Q37sFigaCs3CarUK9HrBW4MtjR0BRMenpckgWsx60WbUCZqxJX1Wya2fYmM2rrBc9p7AAY/pRPov4MrPblz0l7bK48Ju0Pxy0TuzQbTrVaLNUG2LqgvUmpVC11QhWtsRYOmVcmI10z6dyikfBzI2T6La50u028dTluhP3J87mf6RI0lHPADjh8amamEyxAuLKb4b2FwtDNYGAdqh1uch6a5TlhAdIsEYOhpZz14UOI6g2HUsz+160BrjQuzdaJZPc+ed4vhtKOtltqYIuNcFWhsVopXyMW/ubGx2GLKY1RI/2qLGUWA/hEL7wbwYN4TiuaN5MWgA6X37QKoPm3dGMnvkHOofh9Roi4+Nkidv6gLRvBBYzk05fXQ3Qhzg2jEJhtXDePVeH+TfDkc+ZBD5fQfwatpIsoUdGu8xpNwPQ4itHDu4F2tJ+AR56sUu0CB/MLT94fLHJ4+FIXruJWH/DKpchlEsPkA+fBBFTvYUzbC3/X/GCyEoch6BIncvokcgoSHBoD+Y+q5Fa98J5t/YE2i56siVC5EIEcbdCx6Ywx3IE++TLRnLq7NOKNOWURk1l/xPetOwfTJ5j7Z3NDxzIgJkK9GW3Y7oBEvvHzqvPjeZzBuhiF7RbPX1pSVjDvcXjyTL+QsKN06kePd0SgOmUnTYBarWErzOByGCyUw5hOnWTFTpx2M6weK/AqpLD07jbU4gQ53P0fP9AB4sGk19uBOF88by7P8te09CNvMrVIEOyNY70eeDDQya8CuNiiAqzzhScXNDaVfDON+m50HTIWE+O3453bFyouhP+9e9KVr7DZluIyncPZXa8Bm0jx/IQzEAITbhHxYFme7IDjmhTPav7ARVifvjy2Jm05a7DlnyIcTnUSwSjsT360fG4N5kjfqYXFtKFo4h13k8/nYOiP4h5CQG0VoQiPL2chryDp7pBoY/eR09i6rYVVDgR+TxCx23LXr4IcQaXPu54jNsKX2FF0JssCWIHSHhUOJFdYIXyr8XoMkOzugE67JCWxWXPSiKdkd5yonGZwHI04I4vVfKluDD3L3iR16cG1LvIFa6BrJzTzgNj3yp+92J0t9+QHlzIfrifdpO0GrM9qxOduP11UUUnphL4a7RWDM8oNQHFItpy1yG4eY8eOkJ+gCQSSiPmGib68Kb227U50hp1iU4d4KAaDW9lKqfrjbUpK2gIMIJedR36PLWo3kgpSZ+GXUPJBjy1vFW5k/5BRdKzi5AnROA6lGA1qi+Puddc1K358tcKd5WPJn15taGWvUTKerMNdQkrkSTtgpNphfq9DXoc9ZQn+JBxR9zqbknQfdqG7UZfry+JtE0VMTMMVu6gc2GVGGqOHLfUrULnWI3VYneqO54ok7xRHlrKeo0b9T/ulF+/nsqbcdSk+RJja25Nm8jRtUOjOqT1026biDGXNHamNa7XhFxSpUsMdUlLaExeyW6VBsWvxCtbVx3Y35HY91TT+oeulKf40tD+f43+roroRbjPTuL6Wo3sPGJaLNkiNeZUUJ2atvAnMgfvR7vc75UFuueVXppWYEyzl1VmyBVlV+TZtUmb0nWFJw/WnwzfN7L69vtNPVJwmpOFhbjpQ7rPyXTHALIQZVcAAAAAElFTkSuQmCC"
+                style="width:20px;height:20px;margin-right:10px;">
+            <span class="cmusic_textCross">粤公网安备 44011302003939号</span>
+        </a>
+    </div>
+    <script src="run.js"></script>
+</body>
+
+</html>
