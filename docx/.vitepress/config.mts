@@ -21,6 +21,7 @@ export default defineConfig({
           { text: '下载', link: 'https://download.music.mimicry.cool/' },
           { text: '了解拟声', link: '/info/info' },
           { text: '使用帮助', link: '/help/help' },
+          { text: '拟声++', link: '/help/mymusicPlusPlus' },
           { text: '开发记录', link: '/develop/develop' },
         ]
       }
