@@ -11,15 +11,17 @@ export default defineConfig({
       { text: '下载', link: 'https://download.music.mimicry.cool/' },
       { text: '了解拟声', link: '/info/info' },
       { text: '使用帮助', link: '/help/help' },
-      { text: '关于作者', link: '/author/about' },
+      { text: '关于作者', link: '/about/author' },
     ],
 
     sidebar: [
       {
-        text: '使用帮助',
+        text: '目录',
         items: [
-          { text: 'Markdown Examples', link: '/help/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/help/api-examples' }
+          { text: '下载', link: 'https://download.music.mimicry.cool/' },
+          { text: '了解拟声', link: '/info/info' },
+          { text: '使用帮助', link: '/help/help' },
+          { text: '开发记录', link: '/develop/develop' },
         ]
       }
     ],

@@ -1,0 +1,43 @@
+# 支持的音视频格式
+- 选择使用播放组件`libmpv`时，得益于`libmpv`/`ffmpeg`的强大，拟声支持了绝大多数的音视频格式播放，但限制了扫描的格式，如果您有其他格式需求，可提出添加；以下是目前支持的扫描格式，在电脑浏览器中，您可以按`ctrl+f`快捷查找是否存在目标格式。
+- 安卓端如果选择使用播放组件`Media3`，支持的格式更多是取决于您的系统。
+
+## 音频格式
+  - mp3
+  - flac
+  - wav
+  - m4a
+  - aac
+  - aa3
+  - ape
+  - ac3
+  - aiff
+  - aif
+  - aifc
+  - afc
+  - alac
+  - wma
+  - dsf
+  - dff
+  - diff
+  - oma
+  - ogg
+  - oga
+  - opus
+  - ra
+  - thd
+  - mka
+  - 3gp
+  - m4b
+
+## 视频格式
+  - m4s
+  - mp4
+  - mkv
+  - wmv
+  - flv
+  - avi
+  - mov
+  - m4v
+  - asf
+  - rm
