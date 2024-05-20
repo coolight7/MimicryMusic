@@ -9,8 +9,8 @@ export default defineConfig({
     nav: [
       { text: '主页', link: '/' },
       { text: '下载', link: 'https://download.music.mimicry.cool/' },
-      { text: '了解拟声', link: '/info/info' },
-      { text: '使用帮助', link: '/help/help' },
+      { text: '了解拟声', link: '/info/' },
+      { text: '使用帮助', link: '/help/' },
       { text: '关于作者', link: '/about/author' },
     ],
 
@@ -19,10 +19,10 @@ export default defineConfig({
         text: '目录',
         items: [
           { text: '下载', link: 'https://download.music.mimicry.cool/' },
-          { text: '了解拟声', link: '/info/info' },
-          { text: '使用帮助', link: '/help/help' },
-          { text: '拟声++', link: '/help/mymusicPlusPlus' },
-          { text: '开发记录', link: '/develop/develop' },
+          { text: '了解拟声', link: '/info/' },
+          { text: '使用帮助', link: '/help/' },
+          { text: '拟声++', link: '/mymusicPlusPlus/' },
+          { text: '开发记录', link: '/develop/' },
         ]
       }
     ],
@@ -41,7 +41,7 @@ export default defineConfig({
     },
 
     outline: {
-      label: '页面导航'
+      label: '本页导航'
     },
     
     langMenuLabel: '多语言',

@@ -12,7 +12,7 @@ hero:
       link: https://download.music.mimicry.cool/
     - theme: alt
       text: 使用帮助
-      link: /help/help
+      link: /help/
     - theme: alt
       text: GitHub
       link: https://github.com/coolight7/MimicryMusic
