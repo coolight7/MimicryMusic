@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  lang: 'zh-Hans',
   title: "拟声",
   description: "拟物风音视频播放器",
   themeConfig: {

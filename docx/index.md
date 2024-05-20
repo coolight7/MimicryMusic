@@ -17,7 +17,7 @@ hero:
       text: GitHub
       link: https://github.com/coolight7/MimicryMusic
   image:
-      src: /images/logo-tran.png
+      src: images/logo-tran.png
       alt: 拟声
 
 features:
