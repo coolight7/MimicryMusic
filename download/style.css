@@ -79,7 +79,6 @@ body {
 
 .mimicry_button {
     font-size: large;
-    font-weight: bold;
     color: #fff;
     background-color: #66ccff;
     border: none;
@@ -90,11 +89,24 @@ body {
     padding-right: 30px;
     align-items: center;
     justify-content: center;
+    box-shadow: 10px 10px 15px #19191e, -5px -5px 10px #4b505a;
+    -webkit-box-shadow: 10px 10px 15px #19191e, -5px -5px 10px #4b505a;
 }
 
 .mimicry_button:hover {
     cursor: pointer;
     background-color: #66ccffaa;
+}
+
+.mimicry_button_normal {
+    color: #66ccff;
+    background-color: #2a3138;
+}
+
+.mimicry_button_normal:hover {
+    cursor: pointer;
+    color: #dde8fc;
+    background-color: #2a313877;
 }
 
 .mimicry_popup {

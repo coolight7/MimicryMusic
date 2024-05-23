@@ -51,8 +51,8 @@ function download(index) {
             <li class="cmusic_playlist_li_notransform" style="padding-top: 20px;padding-bottom: 20px;">
                 <div class="mimicry_row" style="justify-content: space-between;">
                     <span class="cmusic_textMain">${item["name"]}</span>
-                    <button class="mimicry_button"
-                        ${(item["name"] != "arm64") ? "style='background-color: #2a3138;'" : ''}
+                    <button 
+                        class="${(item["name"] == "arm64") ? "mimicry_button" : 'mimicry_button mimicry_button_normal'}"
                         onClick="downloadLink('${item["link"]}')"
                         >下载</button>
                 </div>
