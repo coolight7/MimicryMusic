@@ -13,3 +13,6 @@
 
 ### 在插件里找不到Bilibili
 - 在应用商店下载的版本不会包含`Bilibili`插件，可在[官网](https://download.music.mimicry.cool/)下载覆盖安装。
+
+### B站搜索、导入错误/异常/失败
+- 可[绑定Bili账号](plugins/bilibili/index.md#绑定b站账号)后尝试，如果还不行请反馈。
