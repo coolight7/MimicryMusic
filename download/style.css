@@ -99,13 +99,13 @@ body {
 }
 
 .mimicry_button_normal {
-    color: #66ccff;
+    color: #dde8fc;
     background-color: #2a3138;
 }
 
 .mimicry_button_normal:hover {
     cursor: pointer;
-    color: #dde8fc;
+    color: #66ccff;
     background-color: #2a313877;
 }
 
