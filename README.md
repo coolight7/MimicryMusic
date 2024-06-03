@@ -1,5 +1,7 @@
 # MimicryMusic 拟声
-* 下载官网: https://download.music.mimicry.cool/
+* [官网](https://blog.mimicry.cool/)
+* [下载官网](https://download.music.mimicry.cool/)
+* [GitHub](https://github.com/coolight7/MimicryMusic)
 
 ## 简介
 * 新拟物风格的 音视频播放器
