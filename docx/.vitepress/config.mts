@@ -5,6 +5,7 @@ export default defineConfig({
   lang: 'zh-Hans',
   title: "拟声",
   description: "拟物风音视频播放器",
+  appearance: "dark",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
