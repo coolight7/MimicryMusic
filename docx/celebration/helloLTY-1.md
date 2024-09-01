@@ -11,7 +11,6 @@
 ### 活动内容
 1. 为`洛天依`发布的一个[B站视频](https://space.bilibili.com/36081646)送出**点赞并投币**
 2. 为`洛天依12周年`的一个[B站相关作品](https://www.bilibili.com/v/topic/detail/?topic_id=1190319&topic_name=%E6%B4%9B%E5%A4%A9%E4%BE%9D%E5%8D%81%E4%BA%8C%E5%91%A8%E5%B9%B4)送出**点赞并投币**
-3. 为`洛天依生日会直播`点赞
 
 ### 领取奖励
 - 请回到`拟声`内的活动页面领取。
