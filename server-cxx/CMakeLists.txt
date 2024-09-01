@@ -1,0 +1,14 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
+set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "build type")
+
+set(CMAKE_C_COMPILER_WORKS ON)
+set(CMAKE_CXX_COMPILER_WORKS ON)
+
+PROJECT(
+	MimicryMusic
+	LANGUAGES C CXX
+)
+
+add_compile_definitions(MyHttpServer_HOME="${PROJECT_SOURCE_DIR}/")
+ADD_SUBDIRECTORY("src" "bin")
+message(${CMAKE_BUILD_TYPE})
