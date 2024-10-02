@@ -14,7 +14,7 @@ function loadData() {
             "branch": "Main",
             "created_time": 1727835356,
             "depict": "",
-            "downlist": "[{\"link\": \"https://mycos-res.mimicry.cool/client/linux/MimicryMusic-linux-0_37_0.zip\", \"name\": \"all\", \"depict\": \"\"}]",
+            "downlist": "[{\"link\": \"https://mycos-res.mimicry.cool/client/linux/MimicryMusic-linux-0_37_0.tar.gz\", \"name\": \"all\", \"depict\": \"\"}]",
             "important": 100,
             "link": "https://download.music.mimicry.cool/",
             "log": "",
