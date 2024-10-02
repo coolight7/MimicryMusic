@@ -10,7 +10,7 @@
   * workflow 的任务流设计能把回调也变得简单易懂，c++中不可多得的异步框架，跨平台；支持 http、rpc、mysql 等网络开发和计算任务调度，你值得拥有！
 * 客户端：
   * flutter
-  * 支持[安卓]、[windows]；允许多端同时登录账号，并将自动同步 歌单、歌词、webdav连接 等
+  * 支持[安卓]、[windows]、[linux]；允许多端同时登录账号，并将自动同步 歌单、歌词、webdav连接 等
   * 支持播放 bili 歌曲、本地音乐、音乐文件链接、webdav、阿里云盘、百度云盘，拥有内置音乐云盘
   * 支持播放绝大多数格式；支持视频MV、Anime4K 实时画质提升、逐帧播放
   * 支持歌词弹幕、状态栏歌词、桌面歌词，高容错的歌词解析能力，支持歌词制作、显示翻译歌词等
@@ -26,6 +26,6 @@
 ![Shell_20230804-211233-367-](https://github.com/coolight7/MimicryMusic/assets/91963225/6302a253-ee33-410f-b280-8d3852b1c996)
 
 ## 支持平台：
-* web
-* windows (win10及以上，且为64位)
-* android (安卓4.1及以上，支持arm64-v8a、armeabi-v7a、x86_64)
+- windows (win10及以上，且为64位)
+- android (安卓4.1及以上，支持arm64-v8a、armeabi-v7a、x86_64)
+- linux
