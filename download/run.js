@@ -9,6 +9,22 @@ function loadData() {
     let listWidget = document.getElementById(listId);
     if (null != listWidget) {
         let innerHtml = "";
+        data.push({
+            "access": 200,
+            "branch": "Main",
+            "created_time": 1727835356,
+            "depict": "",
+            "downlist": "[{\"link\": \"https://mycos-res.mimicry.cool/client/linux/MimicryMusic-linux-0_37_0.zip\", \"name\": \"all\", \"depict\": \"\"}]",
+            "important": 100,
+            "link": "https://download.music.mimicry.cool/",
+            "log": "",
+            "name": "0.37.0 正式版",
+            "necessary": 200,
+            "type": "linux",
+            "uid": 1000000,
+            "version": 3700,
+            "version_str": "0.37.0",
+        });
         for (let i = 0; i < data.length; ++i) {
             let item = data[i];
             let systemName = systemTypeToViewName(item["type"]);
@@ -165,6 +181,8 @@ function systemTypeToViewName(type) {
             return "安卓";
         case "windows":
             return "windows";
+        case "linux":
+            return "linux";
     }
     return "";
 }
@@ -193,6 +211,8 @@ function getDepict(system, branch) {
             if (branch == "Main") {
                 return `• 系统要求：64位 windows 10 及以上`;
             }
+        case "linux":
+            return `• 仅实现了部分基础功能，体验尝鲜~`;
     }
     return ""
 }
