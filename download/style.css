@@ -29,6 +29,25 @@ body {
     color: #dde8fc;
 }
 
+.cmusic_appTitle {
+    font-size: 77px;
+    font-weight: bolder;
+    color: #dde8fc;
+}
+
+@media only screen and (max-width: 1100px) {
+    .cmusic_appTitle {
+        font-size: 7vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .cmusic_appTitle {
+        font-size: 40px;
+    }
+}
+
+
 /*列表ul样式*/
 .cmusic_playList_ul {
     width: 100%;
@@ -43,12 +62,23 @@ body {
 }
 
 .cmusic_image {
-    border: 7px solid #3c414b;
-    border-radius: 20px;
-    width: 150px;
-    height: 150px;
-    box-shadow: 20px 20px 30px #19191e, -15px -15px 30px #4b505a;
-    -webkit-box-shadow: 20px 20px 30px #19191e, -15px -15px 30px #4b505a;
+    border: 0.5vw solid #3c414b;
+    border-radius: 2vw;
+    width: 12vw;
+    height: 12vw;
+    box-shadow: 2vw 2vw 3vw #19191e, -2vw -2vw 3vw #4b505a;
+    -webkit-box-shadow: 2vw 2vw 3vw #19191e, -2vw -2vw 3vw #4b505a;
+}
+
+@media only screen and (max-width: 1300px) {
+    .cmusic_image {
+        border: 7px solid #3c414b;
+        border-radius: 30px;
+        width: 160px;
+        height: 160px;
+        box-shadow: 20px 20px 30px #19191e, -20px -20px 30px #4b505a;
+        -webkit-box-shadow: 20px 20px 30px #19191e, -20px -20px 30px #4b505a;
+    }
 }
 
 /*滚动条样式*/
