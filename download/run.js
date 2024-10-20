@@ -9,22 +9,6 @@ function loadData() {
     let listWidget = document.getElementById(listId);
     if (null != listWidget) {
         let innerHtml = "";
-        data.push({
-            "access": 200,
-            "branch": "Main",
-            "created_time": 1727835356,
-            "depict": "",
-            "downlist": "[{\"link\": \"https://mycos-res.mimicry.cool/client/linux/MimicryMusic-linux-0_37_0.tar.gz\", \"name\": \"all\", \"depict\": \"\"}]",
-            "important": 100,
-            "link": "https://download.music.mimicry.cool/",
-            "log": "",
-            "name": "0.37.0 正式版",
-            "necessary": 200,
-            "type": "linux",
-            "uid": 1000000,
-            "version": 3700,
-            "version_str": "0.37.0",
-        });
         for (let i = 0; i < data.length; ++i) {
             let item = data[i];
             let systemName = systemTypeToViewName(item["type"]);
@@ -181,6 +165,8 @@ function systemTypeToViewName(type) {
             return "安卓";
         case "windows":
             return "windows";
+        case "macos":
+            return "macos";
         case "linux":
             return "linux";
     }
@@ -200,19 +186,23 @@ function getDepict(system, branch) {
     switch (system) {
         case "android":
             if (branch == "Main") {
-                return `• 系统要求：Android 5.0 及以上; 
+                return `• 系统要求：Android 5.0 或以上; 
 • 完整的播放能力和功能支持。`;
             } else if (branch == "SPA4") {
-                return `• 系统要求：Android 4.1 及以上;
+                return `• 系统要求：Android 4.1 或以上;
 • 当完整版闪退时可尝试该版本。
 • 支持安卓4.x，移除了播放组件Libmpv，因此缺失了部分播放能力。`;
             }
         case "windows":
             if (branch == "Main") {
-                return `• 系统要求：64位 windows 10 及以上`;
+                return `• 系统要求：x64 Windows 10 或以上`;
             }
+        case "macos":
+            return `• 系统要求：arm64/x64 Macos11 或以上
+• 实现了部分基础功能，体验尝鲜~`;
         case "linux":
-            return `• 仅实现了部分基础功能，体验尝鲜~`;
+            return `• 系统要求：arm64/x64
+• 实现了部分基础功能，体验尝鲜~`;
     }
     return ""
 }

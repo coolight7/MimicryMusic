@@ -26,6 +26,7 @@
 ![Shell_20230804-211233-367-](https://github.com/coolight7/MimicryMusic/assets/91963225/6302a253-ee33-410f-b280-8d3852b1c996)
 
 ## 支持平台：
-- windows (win10及以上，且为64位)
-- android (安卓4.1及以上，支持arm64-v8a、armeabi-v7a、x86_64)
-- linux
+- android (安卓4.1及以上，支持arm64-v8a/armeabi-v7a/x86_64)
+- windows (Win10及以上，x86_64)
+- macos（Macos11及以上，arm64/x86_64）
+- linux（arm64/x86_64）
