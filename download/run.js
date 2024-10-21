@@ -114,25 +114,45 @@ window.onload = () => {
             let rebool = (() => {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     data = JSON.parse(xhr.responseText)["data"]
-                    console.log(data)
-                    data.sort((a, b) => {
-                        if (a["system"] == b["system"]) {
-                            if (a["branch"] == b["branch"]) {
-                                return 0;
-                            } else {
-                                if (a["branch"] == "Main") {
-                                    return -1;
-                                } else {
-                                    return 1;
-                                }
-                            }
-                        } else {
-                            if (a["system"] == "android") {
-                                return -1;
-                            } else {
-                                return 1;
-                            }
+                    function getNum(item) {
+                        var branchNum = 0;
+                        switch (item.branch) {
+                            case "Main": {
+                                branchNum = 10;
+                            } break;
+                            case "SPA4": {
+                                branchNum = 9;
+                            } break;
+                            case "SPEXAMINE": {
+                                branchNum = 8;
+                            } break;
+                            case "SPEXAMINELIMIT": {
+                                branchNum = 7;
+                            } break;
                         }
+                        var systemNum = 0;
+                        switch (item.type) {
+                            case "android": {
+                                systemNum = 10;
+                            } break;
+                            case "ios": {
+                                systemNum = 9;
+                            } break;
+                            case "windows": {
+                                systemNum = 8;
+                            } break;
+                            case "macos": {
+                                systemNum = 7;
+                            } break;
+                            case "linux": {
+                                systemNum = 6;
+                            } break;
+                        }
+                        return systemNum + branchNum * 10;
+                    }
+
+                    data.sort((left, right) => {
+                        return (getNum(right) - getNum(left));
                     });
                     return loadData();
                 } else {
