@@ -9,11 +9,13 @@ body {
 
 .mimicry_column {
     display: flex;
+    display: -ms-flexbox;
     flex-direction: column;
 }
 
 .mimicry_row {
     display: flex;
+    display: -ms-flexbox;
     flex-direction: row;
 }
 
@@ -58,6 +60,7 @@ body {
     margin: 0px;
     padding: 0px;
     display: flex;
+    display: -ms-flexbox;
     flex-direction: column;
 }
 
@@ -159,6 +162,7 @@ body {
 
 .mimicry_popup_content {
     display: flex;
+    display: -ms-flexbox;
     flex-direction: column;
     background-color: #2a3138;
     margin: 7%;

@@ -57,7 +57,7 @@ function download(index) {
                 + '    <div class="mimicry_row" style="justify-content: space-between;">'
                 + '        <span class="cmusic_textMain">{{item_name}}</span>'
                 + '        <button '
-                + '            class="{{item_link}}"'
+                + '            class="{{item_class}}"'
                 + '            onClick="downloadLink(\'{{item_link}}\')"'
                 + '            >下载</button>'
                 + '    </div>'
@@ -65,7 +65,8 @@ function download(index) {
                 + '</li>';
             li = li.replace("{{item_name}}", item["name"]);
             li = li.replace("{{item_button_class}}", item["name"]);
-            li = li.replace("{{item_link}}", (item["name"] == "arm64") ? "mimicry_button" : 'mimicry_button mimicry_button_normal');
+            li = li.replace("{{item_class}}", (item["name"] == "arm64") ? "mimicry_button" : 'mimicry_button mimicry_button_normal');
+            li = li.replace("{{item_link}}", item["link"]);
             li = li.replace("{{item_depict}}", item["depict"]);
             innerHtml += li;
         }
