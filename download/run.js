@@ -1,34 +1,40 @@
-const listId = "list";
-const downlistId = "downlist";
-const popupId = "mimicry_popup";
-const adaptBodyId = "adaptBody";
+var listId = "list";
+var downlistId = "downlist";
+var popupId = "mimicry_popup";
+var adaptBodyId = "adaptBody";
 
 var data = [];
 
 function loadData() {
-    let listWidget = document.getElementById(listId);
+    var listWidget = document.getElementById(listId);
     if (null != listWidget) {
-        let innerHtml = "";
-        for (let i = 0; i < data.length; ++i) {
-            let item = data[i];
-            let systemName = systemTypeToViewName(item["type"]);
-            let branchName = branchTypeToViewName(item["branch"]);
-            let depict = getDepict(item["type"], item["branch"]);
-            innerHtml += `
-            <li class="cmusic_playlist_li_notransform" style="margin-top: 10px;margin-bottom: 10px;">
-                <div class="mimicry_row" style="justify-content: space-between;">
-                    <div class="mimicry_row" style="align-items: center;">
-                        <span class="cmusic_textMain">${systemName} ${branchName}</span>
-                    </div>
-                    <button class="mimicry_button" onClick="download(${i})">下载</button>
-                </div>
-                <div class="mimicry_row"
-                style="width:min-content;background-color: #66ccff;border-radius: 5px;padding-left: 5px;padding-right: 5px;margin-bottom:10px;align-items: center;justify-content: center;height:min-content;">
-                <span class="cmusic_textCross" style="color: #fff;">${item['version_str']}</span>
-            </div>
-                <span class="cmusic_textCross" style="white-space: pre-line;">${depict}</span>
-            </li>
-                         `;
+        var innerHtml = "";
+        for (var i = 0; i < data.length; ++i) {
+            var item = data[i];
+            var systemName = systemTypeToViewName(item["type"]);
+            var branchName = branchTypeToViewName(item["branch"]);
+            var depict = getDepict(item["type"], item["branch"]);
+            var li =
+                '<li class="cmusic_playlist_li_notransform" style="margin-top: 10px;margin-bottom: 10px;">'
+                + '    <div class="mimicry_row" style="justify-content: space-between;">'
+                + '        <div class="mimicry_row" style="align-items: center;">'
+                + '            <span class="cmusic_textMain">{{systemName}} {{branchName}}</span>'
+                + '        </div>'
+                + '        <button class="mimicry_button" onClick="download({{index}})">下载</button>'
+                + '    </div>'
+                + '    <div class="mimicry_row">'
+                + '        <div style="display: inline-block; white-space: nowrap; background-color: #66ccff; border-radius: 5px; padding-left: 5px; padding-right: 5px; margin-bottom:10px; align-items: center; justify-content: center;">'
+                + '            <span class="cmusic_textCross" style="color: #fff;">{{item_version_str}}</span>'
+                + '        </div>'
+                + '    </div>'
+                + '    <span class="cmusic_textCross" style="white-space: pre-line;">{{depict}}</span>'
+                + '</li>';
+            li = li.replace("{{systemName}}", systemName);
+            li = li.replace("{{branchName}}", branchName);
+            li = li.replace("{{index}}", i);
+            li = li.replace("{{item_version_str}}", item['version_str']);
+            li = li.replace("{{depict}}", depict);
+            innerHtml += li;
         }
         listWidget.innerHTML = innerHtml;
         return true;
@@ -37,30 +43,33 @@ function loadData() {
 }
 
 function download(index) {
-    let item = data[index];
-    let list = JSON.parse(item["downlist"]);
+    var item = data[index];
+    var list = JSON.parse(item["downlist"]);
     if (list.length == 0) {
         window.open(item["link"], "_blank");
     } else if (list.length == 1) {
         window.open(list[0]["link"], "_blank");
     } else {
-        let innerHtml = "";
-        for (let i = 0; i < list.length; ++i) {
-            let item = list[i];
-            innerHtml += `
-            <li class="cmusic_playlist_li_notransform" style="padding-top: 20px;padding-bottom: 20px;">
-                <div class="mimicry_row" style="justify-content: space-between;">
-                    <span class="cmusic_textMain">${item["name"]}</span>
-                    <button 
-                        class="${(item["name"] == "arm64") ? "mimicry_button" : 'mimicry_button mimicry_button_normal'}"
-                        onClick="downloadLink('${item["link"]}')"
-                        >下载</button>
-                </div>
-                <span class="cmusic_textCross">${item["depict"]}</span>
-            </li>
-                         `;
+        var innerHtml = "";
+        for (var i = 0; i < list.length; ++i) {
+            var item = list[i];
+            var li = '<li class="cmusic_playlist_li_notransform" style="padding-top: 20px;padding-bottom: 20px;">'
+                + '    <div class="mimicry_row" style="justify-content: space-between;">'
+                + '        <span class="cmusic_textMain">{{item_name}}</span>'
+                + '        <button '
+                + '            class="{{item_link}}"'
+                + '            onClick="downloadLink(\'{{item_link}}\')"'
+                + '            >下载</button>'
+                + '    </div>'
+                + '    <span class="cmusic_textCross">{{item_depict}}</span>'
+                + '</li>';
+            li = li.replace("{{item_name}}", item["name"]);
+            li = li.replace("{{item_button_class}}", item["name"]);
+            li = li.replace("{{item_link}}", (item["name"] == "arm64") ? "mimicry_button" : 'mimicry_button mimicry_button_normal');
+            li = li.replace("{{item_depict}}", item["depict"]);
+            innerHtml += li;
         }
-        let popupWidget = document.getElementById(downlistId);
+        var popupWidget = document.getElementById(downlistId);
         popupWidget.innerHTML = innerHtml;
         popupOpen();
     }
@@ -73,16 +82,16 @@ function downloadLink(link) {
 }
 
 function popupOpen() {
-    let popupWidget = document.getElementById(popupId);
+    var popupWidget = document.getElementById(popupId);
     if (null != popupWidget) {
-        popupWidget.style = "display: flex;";
+        popupWidget.className = "mimicry_popup";
     }
 }
 
 function popupClose() {
-    let popupWidget = document.getElementById(popupId);
+    var popupWidget = document.getElementById(popupId);
     if (null != popupWidget) {
-        popupWidget.style = "display: none;";
+        popupWidget.className = "musicxx_hide";
     }
 }
 
@@ -91,27 +100,26 @@ function removeBobbom() {
 }
 
 function autoAdaptLayout() {
-    let bodyWidget = document.getElementById(adaptBodyId);
+    var bodyWidget = document.getElementById(adaptBodyId);
     if (window.innerHeight > window.innerWidth) {
         // 竖屏
-        bodyWidget.classList = ["mimicry_column"];
+        bodyWidget.className = "mimicry_column";
     } else {
         // 横屏
-        bodyWidget.classList = ["mimicry_row"];
+        bodyWidget.className = "mimicry_row";
     }
-    bodyWidget.style = "display:flex;";
 }
 
 window.onresize = autoAdaptLayout;
 
-window.onload = () => {
+window.onload = function () {
     // 自适应横竖屏
     autoAdaptLayout();
     // 请求下载列表
     xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = async function () {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
-            let rebool = (() => {
+            var rebool = (function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     data = JSON.parse(xhr.responseText)["data"]
                     function getNum(item) {
@@ -151,7 +159,7 @@ window.onload = () => {
                         return systemNum + branchNum * 10;
                     }
 
-                    data.sort((left, right) => {
+                    data.sort(function (left, right) {
                         return (getNum(right) - getNum(left));
                     });
                     return loadData();
@@ -164,13 +172,12 @@ window.onload = () => {
                 // 加载成功
             } else {
                 // 加载失败
-                let listWidget = document.getElementById(listId);
+                var listWidget = document.getElementById(listId);
                 if (null != listWidget) {
-                    listWidget.innerHTML = `
-                <li class="cmusic_playlist_li_notransform" style="display: flex;justify-content: center;align-items: center;">
-                    <span class="cmusic_textMain" style="color: #F00">『下载列表加载失败』</span>
-                </li>
-`;
+                    listWidget.innerHTML =
+                        '<li class="cmusic_playlist_li_notransform" style="display: flex;justify-content: center;align-items: center;">'
+                        + '    <span class="cmusic_textMain" style="color: #F00">『下载列表加载失败』</span>'
+                        + '</li>';
                 }
             }
         }
@@ -206,23 +213,23 @@ function getDepict(system, branch) {
     switch (system) {
         case "android":
             if (branch == "Main") {
-                return `• 系统要求：Android 5.0 或以上; 
-• 完整的播放能力和功能支持。`;
+                return '• 系统要求：Android 5.0 或以上; \n'
+                    + '• 完整的播放能力和功能支持。';
             } else if (branch == "SPA4") {
-                return `• 系统要求：Android 4.1 或以上;
-• 当完整版闪退时可尝试该版本。
-• 支持安卓4.x，移除了播放组件Libmpv，因此缺失了部分播放能力。`;
+                return '• 系统要求：Android 4.1 或以上;\n'
+                    + '• 当完整版闪退时可尝试该版本。\n'
+                    + '• 支持安卓4.x，移除了播放组件Libmpv，因此缺失了部分播放能力。';
             }
         case "windows":
             if (branch == "Main") {
-                return `• 系统要求：x64 Windows 10 或以上`;
+                return '• 系统要求：x64 Windows 10 或以上';
             }
         case "macos":
-            return `• 系统要求：arm64/x64 Macos11 或以上
-• 实现了部分基础功能，体验尝鲜~`;
+            return '• 系统要求：arm64/x64 Macos11 或以上\n'
+                + '• 实现了部分基础功能，体验尝鲜~';
         case "linux":
-            return `• 系统要求：arm64/x64
-• 实现了部分基础功能，体验尝鲜~`;
+            return '• 系统要求：arm64/x64\n'
+                + '• 实现了部分基础功能，体验尝鲜~';
     }
     return ""
 }

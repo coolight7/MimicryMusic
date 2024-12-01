@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "D:/0Acoolight/Program/Web/mymusic-docx/server-cxx"
+    "cmake.sourceDirectory": "D:/0Acoolight/Program/Web/mymusic-docx/server-cxx",
+    "editor.formatOnSave": true
 }
