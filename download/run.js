@@ -183,7 +183,12 @@ window.onload = function () {
             }
         }
     };
-    xhr.open("GET", "https://api.music.mimicry.cool/api/procedure/get/download/list", true);
+    var url = "/api/procedure/get/download/list";
+    if (window.location.host.indexOf("127.0.0.1") >= 0) {
+        // 本地测试
+        url = "https://api.music.mimicry.cool" + url;
+    }
+    xhr.open("GET", url, true);
     xhr.send(null);
 };
 
