@@ -122,7 +122,13 @@ window.onload = function () {
         if (xhr.readyState == 4) {
             var rebool = (function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
-                    data = JSON.parse(xhr.responseText)["data"]
+                    var data;
+                    try {
+                        data = JSON.parse(xhr.responseText)["data"]
+                    } catch (e) {
+                        console.log(e);
+                        data = ((new Function("return " + xhr.responseText))())["data"];
+                    }
                     function getNum(item) {
                         var branchNum = 0;
                         switch (item.branch) {
