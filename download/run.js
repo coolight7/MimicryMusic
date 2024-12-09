@@ -3,22 +3,25 @@ var downlistId = "downlist";
 var popupId = "mimicry_popup";
 var adaptBodyId = "adaptBody";
 
-var data = [];
+var netRespData = [];
 
 function loadData() {
     var listWidget = document.getElementById(listId);
     if (null != listWidget) {
         var innerHtml = "";
-        for (var i = 0; i < data.length; ++i) {
-            var item = data[i];
+        for (var i = 0; i < netRespData.length; ++i) {
+            var item = netRespData[i];
             var systemName = systemTypeToViewName(item["type"]);
             var branchName = branchTypeToViewName(item["branch"]);
             var depict = getDepict(item["type"], item["branch"]);
             var li =
                 '<li class="cmusic_playlist_li_notransform" style="margin-top: 10px;margin-bottom: 10px;">'
-                + '    <div class="mimicry_row" style="justify-content: space-between;">'
+                + '    <div class="mimicry_row" style="margin-bottom: 10px;justify-content: space-between;align-items: center;">'
                 + '        <div class="mimicry_row" style="align-items: center;">'
-                + '            <span class="cmusic_textMain">{{systemName}} {{branchName}}</span>'
+                + '            <img class="cmusic_icon" src="images/{{item_icon}}" />'
+                + '            <div class="mimicry_row" style="align-items: center;">'
+                + '                <span class="cmusic_textMain">{{systemName}} {{branchName}}</span>'
+                + '            </div>'
                 + '        </div>'
                 + '        <button class="mimicry_button" onClick="download({{index}})">下载</button>'
                 + '    </div>'
@@ -29,6 +32,7 @@ function loadData() {
                 + '    </div>'
                 + '    <span class="cmusic_textCross" style="white-space: pre-line;">{{depict}}</span>'
                 + '</li>';
+            li = li.replace("{{item_icon}}", systemTypeToIconFile(item["type"]));
             li = li.replace("{{systemName}}", systemName);
             li = li.replace("{{branchName}}", branchName);
             li = li.replace("{{index}}", i);
@@ -43,7 +47,7 @@ function loadData() {
 }
 
 function download(index) {
-    var item = data[index];
+    var item = netRespData[index];
     var list = JSON.parse(item["downlist"]);
     if (list.length == 0) {
         window.open(item["link"], "_blank");
@@ -122,12 +126,11 @@ window.onload = function () {
         if (xhr.readyState == 4) {
             var rebool = (function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
-                    var data;
                     try {
-                        data = JSON.parse(xhr.responseText)["data"]
+                        netRespData = JSON.parse(xhr.responseText)["data"]
                     } catch (e) {
                         console.log(e);
-                        data = ((new Function("return " + xhr.responseText))())["data"];
+                        netRespData = ((new Function("return " + xhr.responseText))())["data"];
                     }
                     function getNum(item) {
                         var branchNum = 0;
@@ -166,12 +169,12 @@ window.onload = function () {
                         return systemNum + branchNum * 10;
                     }
 
-                    data.sort(function (left, right) {
+                    netRespData.sort(function (left, right) {
                         return (getNum(right) - getNum(left));
                     });
                     return loadData();
                 } else {
-                    console.log(error)
+                    console.log("request faild")
                 }
                 return false;
             })();
@@ -192,9 +195,11 @@ window.onload = function () {
     var url = "/api/procedure/get/download/list";
     if (window.location.host.indexOf("127.0.0.1") >= 0) {
         // 本地测试
-        url = "https://api.music.mimicry.cool" + url;
+        // url = "https://api.music.mimicry.cool" + url;
+        url = "http://127.0.0.1:1000" + url;
     }
     xhr.open("GET", url, true);
+    xhr.setRequestHeader("Cache-control", "no-store, max-age=0");
     xhr.send(null);
 };
 
@@ -208,6 +213,20 @@ function systemTypeToViewName(type) {
             return "macos";
         case "linux":
             return "linux";
+    }
+    return "";
+}
+
+function systemTypeToIconFile(type) {
+    switch (type) {
+        case "android":
+            return "android.png";
+        case "windows":
+            return "windows.png";
+        case "macos":
+            return "apple.png";
+        case "linux":
+            return "linux.png";
     }
     return "";
 }
