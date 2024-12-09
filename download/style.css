@@ -9,14 +9,16 @@ body {
 
 .mimicry_column {
     display: flex;
-    display: -ms-flexbox;
     flex-direction: column;
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
 }
 
 .mimicry_row {
     display: flex;
-    display: -ms-flexbox;
     flex-direction: row;
+    display: -ms-flexbox;
+    -ms-flex-direction: row;
 }
 
 .cmusic_textCross {
@@ -26,7 +28,7 @@ body {
 }
 
 .cmusic_textMain {
-    font-size: x-large;
+    font-size: large;
     font-weight: bolder;
     color: #dde8fc;
 }
@@ -38,12 +40,28 @@ body {
 }
 
 @media only screen and (max-width: 1100px) {
+    .cmusic_textCross {
+        font-size: 3vw;
+    }
+
+    .cmusic_textMain {
+        font-size: 3vw;
+    }
+
     .cmusic_appTitle {
         font-size: 7vw;
     }
 }
 
 @media only screen and (max-width: 600px) {
+    .cmusic_textCross {
+        font-size: 16px;
+    }
+
+    .cmusic_textMain {
+        font-size: 16px;
+    }
+
     .cmusic_appTitle {
         font-size: 40px;
     }
@@ -71,6 +89,14 @@ body {
     height: 12vw;
     box-shadow: 2vw 2vw 3vw #19191e, -2vw -2vw 3vw #4b505a;
     -webkit-box-shadow: 2vw 2vw 3vw #19191e, -2vw -2vw 3vw #4b505a;
+}
+
+.cmusic_icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 7px;
+    padding-left: 0px;
+    padding-right: 10px;
 }
 
 .musicxx_hide {
@@ -119,6 +145,7 @@ body {
     color: #fff;
     background-color: #66ccff;
     border: none;
+    height: 40px;
     border-radius: 10px;
     padding-top: 10px;
     padding-bottom: 10px;

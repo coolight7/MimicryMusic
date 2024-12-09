@@ -1,4 +1,9 @@
 {
-    "cmake.sourceDirectory": "D:/0Acoolight/Program/Web/mymusic-docx/server-cxx",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.proxy": {
+        "enable": false,
+        "baseUri": "/api",
+        "proxyUri": "https://download.music.mimicry.cool/api/"
+    }
 }
