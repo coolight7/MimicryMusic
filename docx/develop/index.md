@@ -41,7 +41,7 @@
  ```dart
 final progress = await io.Process.start(
   // 当前项目的可执行程序文件名称
-  "mymusic.exe", 
+  "musicxx.exe", 
   // 传递main函数参数
   [
     "cross-1", // 标记本次启动的进程是次级窗口-1，让它运行起来后知道自己的角色
