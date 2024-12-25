@@ -24,7 +24,7 @@ features:
   - title: 多系统平台支持
     details: 目前已支持安卓/windows/macos/linux，未来可提供IPhone/鸿蒙支持
   - title: 歌词弹幕
-    details: 将歌词作为弹幕发送到屏幕上！降低歌词对其他App内容的遮挡。也支持桌面歌词和状态栏歌词（悬浮窗/系统级）
+    details: 拟声特色功能，将歌词作为弹幕发送到屏幕上！降低歌词对其他App内容的遮挡。也支持桌面歌词和状态栏歌词（悬浮窗/系统级）
   - title: WebDav/阿里云盘/百度云盘
     details: 支持多种云存储，当然也支持本地音视频播放。
   - title: 跨设备共享与控制
