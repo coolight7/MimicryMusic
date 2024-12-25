@@ -43,6 +43,12 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/coolight7/MimicryMusic' }
     ],
+    notFound: {
+      title: "页面未找到",
+      quote: "这可能是因为文章迁移，您可以通过本页面左上角的搜索框查找相关内容。",
+      linkLabel: "回到主页",
+      linkText: "回到主页",
+    },
     search: {
       provider: 'local',
       options: {
